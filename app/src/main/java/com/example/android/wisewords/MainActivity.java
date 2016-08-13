@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
   private TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
   private final String htmlUrlString = "http://www.quotationspage.com/random.php3";
-  private ArrayList<Quote> quoteList = new ArrayList<>();;
+  private ArrayList<Quote> quoteList = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,9 @@ public class MainActivity extends Activity {
 
     @Override
     protected Void doInBackground(String... params) {
+      // below line for debugging; allows breakpoints to be set for the background method
+      /*android.os.Debug.waitForDebugger();*/
+
       String htmlPageUrl = params[0];
       if (quoteIndex == 0) {
         try {
@@ -57,7 +60,7 @@ public class MainActivity extends Activity {
           Document htmlDocument = Jsoup.connect(htmlPageUrl).get();
           Element htmlBodyElement = htmlDocument.body();
           Elements quoteTextList = htmlBodyElement.select("dt.quote > a");
-          Elements quoteAuthorList = htmlBodyElement.select("dd.author > b > a");
+          Elements quoteAuthorList = htmlBodyElement.select("dd.author > b");
           // iterate through the quotes and authors
           if (!quoteList.isEmpty()) quoteList.clear();
           String quoteText, quoteAuthor;
@@ -65,7 +68,7 @@ public class MainActivity extends Activity {
           int listSize = quoteTextList.size();
           for (int index = 0; index < listSize; index++) {
             quoteText = quoteTextList.get(index).ownText();
-            quoteAuthor = quoteAuthorList.get(index).ownText();
+            quoteAuthor = quoteAuthorList.get(index).text();
             quote = new Quote(quoteText, quoteAuthor);
             quoteList.add(quote);
           }

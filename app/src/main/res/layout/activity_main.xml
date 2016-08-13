@@ -16,8 +16,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <!--built custom text view-->
         <com.example.android.wisewords.AcousticTextView
@@ -43,36 +42,38 @@
 
     </LinearLayout>
 
-    <com.example.android.wisewords.TrenchTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quote_text"
-        android:id="@+id/quote_text"
-        android:textColor="#ffffff"
-        android:layout_weight="10.12"
-        android:textSize="25sp"
-        android:layout_marginBottom="28dp"
-        android:gravity="bottom|center_horizontal"
-        android:maxHeight="50dp"
-        />
-
-    <com.example.android.wisewords.TrenchTextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/quote_author"
-        android:id="@+id/quote_author"
+        android:orientation="vertical"
         android:layout_weight="1"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="72dp"
-        android:gravity="center|center_horizontal"
-        />
+        android:gravity="center_vertical">
+
+        <com.example.android.wisewords.TrenchTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quote_text"
+            android:id="@+id/quote_text"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"/>
+
+        <com.example.android.wisewords.TrenchTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/quote_author"
+            android:id="@+id/quote_author"
+            android:textColor="#ffffff"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center">
 
         <ImageView
