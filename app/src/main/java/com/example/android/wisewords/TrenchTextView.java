@@ -8,10 +8,10 @@ import android.widget.TextView;
 /**
  * Created by po482951 on 11/08/2016.
  */
-public class myCustomTextView extends TextView{
+public class TrenchTextView extends TextView{
 
-  public myCustomTextView(Context context, AttributeSet attributeSet) {
+  public TrenchTextView(Context context, AttributeSet attributeSet) {
     super(context, attributeSet);
-    this.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Blockletter.otf"));
+    this.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/trench100free.ttf"));
   }
 }
