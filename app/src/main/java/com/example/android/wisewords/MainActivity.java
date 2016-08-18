@@ -1,11 +1,11 @@
 package com.example.android.wisewords;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -19,10 +19,11 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
   private static final String MAIN_TAG = MainActivity.class.getSimpleName();
-  private TextView quoteTextTView, quoteAuthorTView;
+  private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
-  private final String htmlUrlString = "http://www.quotationspage.com/random.php3";
-  private ArrayList<Quote> quoteList = new ArrayList<>();
+  private static boolean indexHasGoneFullCycle = true;
+  private static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
+  private static ArrayList<Quote> quoteList = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +34,36 @@ public class MainActivity extends Activity {
     // set the first quote to appear on screen
     QuoteAsyncTask asyncTask = new QuoteAsyncTask();
     asyncTask.execute(htmlUrlString);
-    // set listener on next_icon so a click will change to next quote on list
-    ImageView image = (ImageView) findViewById(R.id.next_quote_icon);
-    image.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        // re-execute the task
-        QuoteAsyncTask asyncTask = new QuoteAsyncTask();
-        asyncTask.execute(htmlUrlString);
-      }
-    });
+  }
+
+  // executed when the right_arrow_icon is clicked
+  public void getNextQuote(View view) {
+    QuoteAsyncTask asyncTask = new QuoteAsyncTask();
+    asyncTask.execute(htmlUrlString);
+  }
+
+  // executed when the right_arrow_icon is clicked
+  public void showSavedQuotes(View view) {
+    // Decrementing using modulo; make sure we view same quote on return to MainActivity
+    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
+    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+    // collect all the quote texts from the quote list for the dummy data
+    ArrayList<String> quoteTextList = new ArrayList<>();
+    ArrayList<String> quoteAuthorList = new ArrayList<>();
+    String quoteText, quoteAuthor;
+    for (Quote quote : quoteList) {
+      quoteText = quote.getQuoteText();
+      quoteAuthor = quote.getQuoteAuthor();
+      quoteTextList.add(quoteText);
+      quoteAuthorList.add(quoteAuthor);
+    }
+    // call intent and add bundle containing the quoteText and quoteAuthor lists
+    Intent intent = new Intent(this, SavedQuotes.class);
+    Bundle extras = new Bundle();
+    extras.putStringArrayList("quoteTextList", quoteTextList);
+    extras.putStringArrayList("quoteAuthorList", quoteAuthorList);
+    intent.putExtras(extras);
+    startActivity(intent);
   }
 
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
@@ -54,8 +76,9 @@ public class MainActivity extends Activity {
       /*android.os.Debug.waitForDebugger();*/
 
       String htmlPageUrl = params[0];
-      if (quoteIndex == 0) {
+      if (quoteIndex == 0 && indexHasGoneFullCycle) {
         try {
+          indexHasGoneFullCycle = false;
           // get list of .quote and .author class nodes from the html document
           Document htmlDocument = Jsoup.connect(htmlPageUrl).get();
           Element htmlBodyElement = htmlDocument.body();
@@ -86,6 +109,7 @@ public class MainActivity extends Activity {
       quoteAuthorTView.setText(quoteList.get(quoteIndex).getQuoteAuthor());
       // set the index to point to the next item on the list
       // when it comes back to zero, then we reload some more quotes
+      if (quoteIndex == 19) indexHasGoneFullCycle = true;
       quoteIndex = (quoteIndex + 1) % quoteList.size();
     }
   }

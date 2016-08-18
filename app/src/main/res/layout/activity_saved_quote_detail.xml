@@ -23,23 +23,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/main_activity_title"
-            android:id="@+id/date_text_today"
+            android:id="@+id/detail_date_text"
             android:textColor="#ffffff"
             android:layout_weight="1"
             android:textSize="40sp"
-            android:gravity="center_horizontal"
-            />
+            android:gravity="left"
+            android:text="@string/placeholder_date_text"/>
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/save_quote_icon"
-            android:adjustViewBounds="true"
-            android:src="@drawable/save_icon"
-            android:background="@android:color/transparent"
-            android:maxHeight="43dp"
-            android:layout_weight="1"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
@@ -54,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/quote_text"
-            android:id="@+id/quote_text"
+            android:id="@+id/detail_quote_text"
             android:textColor="#ffffff"
             android:textSize="25sp"
             android:layout_marginBottom="15dp"
@@ -65,7 +60,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/quote_author"
-            android:id="@+id/quote_author"
+            android:id="@+id/detail_quote_author"
             android:textColor="#ffffff"
             android:gravity="center"/>
 
@@ -75,29 +70,17 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="right">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/saved_quotes_icon"
+            android:id="@+id/delete_saved_quote"
+            android:src="@drawable/delete_icon"
             android:adjustViewBounds="true"
-            android:maxWidth="60dp"
-            android:maxHeight="90dp"
-            android:src="@drawable/storehouse_icon"
+            android:maxWidth="8dp"
             android:layout_weight="1"
-            android:onClick="showSavedQuotes"/>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/next_quote_icon"
-            android:src="@drawable/right_arrow_icon"
-            android:adjustViewBounds="true"
-            android:maxWidth="10dp"
-            android:layout_weight="1"
-            android:maxHeight="70dp"
-            android:onClick="getNextQuote"/>
+            android:maxHeight="50dp"/>
 
     </LinearLayout>
 
