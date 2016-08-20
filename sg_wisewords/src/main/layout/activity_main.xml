@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.android.wisewords.MainActivity"
+    android:background="@color/colorPrimary"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--built custom text view-->
+        <com.example.android.wisewords.TrenchTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/main_activity_title"
+            android:id="@+id/date_text_today"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:textSize="40sp"
+            android:gravity="center_horizontal"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_quote_icon"
+            android:adjustViewBounds="true"
+            android:src="@drawable/save_icon"
+            android:background="@android:color/transparent"
+            android:maxHeight="43dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <com.example.android.wisewords.TrenchTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quote_text"
+            android:id="@+id/quote_text"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"/>
+
+        <com.example.android.wisewords.TrenchTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/quote_author"
+            android:id="@+id/quote_author"
+            android:textColor="#ffffff"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saved_quotes_icon"
+            android:adjustViewBounds="true"
+            android:maxWidth="60dp"
+            android:maxHeight="90dp"
+            android:src="@drawable/storehouse_icon"
+            android:layout_weight="1"
+            android:onClick="showSavedQuotes"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/next_quote_icon"
+            android:src="@drawable/right_arrow_icon"
+            android:adjustViewBounds="true"
+            android:maxWidth="10dp"
+            android:layout_weight="1"
+            android:maxHeight="70dp"
+            android:onClick="getNextQuote"/>
+
+    </LinearLayout>
+
+</LinearLayout>
