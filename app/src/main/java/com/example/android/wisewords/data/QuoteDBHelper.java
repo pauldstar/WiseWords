@@ -38,7 +38,7 @@ public class QuoteDBHelper extends SQLiteOpenHelper {
     // It does NOT depend on the version number for your application.
     // If you want to update the schema without wiping data, commenting out the next 2 lines
     // should be your top priority before modifying this method.
-    /**
+    /** consider using alter table to upgrade the database instead of deleting
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + QuoteContract.QuoteEntry.TABLE_NAME);
     onCreate(sqLiteDatabase);
     */

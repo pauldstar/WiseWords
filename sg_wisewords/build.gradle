@@ -1,15 +1,27 @@
 apply plugin: 'com.android.application'
 
+repositories {
+        jcenter()
+    flatDir {
+        dirs 'prebuilt-libs'
+    }
+}
+
 android {
-    compileSdkVersion 23
+    compileSdkVersion 19
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.android.wisewords"
+        applicationId "com.example.android.sg_wisewords"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
         release {
@@ -20,9 +32,5 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile files('libs/jsoup-1.9.2.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
