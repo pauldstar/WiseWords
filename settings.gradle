@@ -1,1 +1,2 @@
 include ':app', ':sg_wisewords'
+include ':app', ':wisewordslib'
