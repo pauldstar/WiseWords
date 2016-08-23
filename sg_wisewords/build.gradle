@@ -34,4 +34,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(":wisewordslib")
+    compile files('libs/vuzix_gesture.jar')
 }
