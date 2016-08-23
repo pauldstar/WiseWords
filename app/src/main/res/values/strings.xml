@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">WiseWords</string>
-    <string name="main_activity_title">Today</string>
-    <string name="quote_text">Happiness is essentially a state of going somewhere, wholeheartedly, one-directionally, without regret or reservation.</string>
-    <string name="quote_author">William H. Sheldon</string>
-</resources>
