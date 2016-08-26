@@ -4,100 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.wisewords.MainActivity"
-    android:background="@color/colorPrimary"
-    android:gravity="center_horizontal">
+    tools:context="com.example.android.wisewords.MainActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <!--built custom text view-->
         <com.example.android.wisewords.TrenchTextView
+            android:id="@+id/date_text_today"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/main_activity_title"
-            android:id="@+id/date_text_today"
-            android:textColor="#ffffff"
             android:layout_weight="1"
-            android:textSize="40sp"
             android:gravity="center_horizontal"
-            />
+            android:text="@string/main_activity_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
 
         <ImageView
+            android:id="@+id/save_quote_icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/save_quote_icon"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:src="@drawable/save_icon"
             android:background="@android:color/transparent"
             android:maxHeight="43dp"
-            android:layout_weight="1"/>
+            android:src="@drawable/save_icon"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_weight="1"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <com.example.android.wisewords.TrenchTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/quote_text"
             android:id="@+id/quote_text"
-            android:textColor="#ffffff"
-            android:textSize="25sp"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"/>
-
-        <com.example.android.wisewords.TrenchTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/quote_author"
-            android:id="@+id/quote_author"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="@string/quote_text"
             android:textColor="#ffffff"
-            android:gravity="center"/>
+            android:textSize="25sp"/>
+
+        <com.example.android.wisewords.TrenchTextView
+            android:id="@+id/quote_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/quote_author"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/saved_quotes_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/saved_quotes_icon"
-            android:adjustViewBounds="true"
-            android:maxWidth="60dp"
-            android:maxHeight="90dp"
-            android:src="@drawable/storehouse_icon"
             android:layout_weight="1"
-            android:onClick="showSavedQuotes"/>
+            android:adjustViewBounds="true"
+            android:maxHeight="90dp"
+            android:maxWidth="60dp"
+            android:onClick="showSavedQuotes"
+            android:src="@drawable/storehouse_icon"/>
 
         <ImageView
+            android:id="@+id/next_quote_icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/next_quote_icon"
-            android:src="@drawable/right_arrow_icon"
-            android:adjustViewBounds="true"
-            android:maxWidth="10dp"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
             android:maxHeight="70dp"
-            android:onClick="getNextQuote"/>
+            android:maxWidth="10dp"
+            android:onClick="getNextQuote"
+            android:src="@drawable/right_arrow_icon"/>
 
     </LinearLayout>
 
