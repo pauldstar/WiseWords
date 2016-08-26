@@ -1,11 +1,13 @@
 package com.example.android.sg_wisewords;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.wisewords.Quote;
@@ -26,8 +28,9 @@ public class MainActivity extends Activity {
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
   private static boolean indexHasGoneFullCycle = true;
-  private static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
+  public static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
   private static ArrayList<Quote> quoteList = new ArrayList<>();
+  private static GestureSensor gestureSensor;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,42 @@ public class MainActivity extends Activity {
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
     // check if gesture controls are enabled on the vuzix device
-    if (GestureSensor.isOn())
-      android.util.Log.i("Gesture","GestureSensor is ON");
+    GestureSensor gestureSensor;
+    if (!GestureSensor.isOn()) {
+      android.util.Log.i("Gesture", "GestureSensor is ON");
+      gestureSensor = new MainGestureSensor(this, this);
+    }
     else android.util.Log.i("Gesture","GestureSensor is OFF");
     // set the first quote to appear on screen
     QuoteAsyncTask asyncTask = new QuoteAsyncTask();
     asyncTask.execute(htmlUrlString);
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+    // Decrementing using modulo; make sure we view same quote on return to MainActivity
+    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
+    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
   }
 
   // executed when the right_arrow_icon is clicked
@@ -52,9 +85,6 @@ public class MainActivity extends Activity {
 
   // executed when the right_arrow_icon is clicked
   public void showSavedQuotes(View view) {
-    // Decrementing using modulo; make sure we view same quote on return to MainActivity
-    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -120,5 +150,38 @@ public class MainActivity extends Activity {
       if (quoteIndex == 19) indexHasGoneFullCycle = true;
       quoteIndex = (quoteIndex + 1) % quoteList.size();
     }
+  }
+
+  // Gesture sensor class for MainActivity
+  private class MainGestureSensor extends GestureSensor {
+
+    private Activity activity;
+
+    public MainGestureSensor(Context context, Activity activity) {
+      super(context);
+      this.activity = activity;
+    }
+
+    @Override
+    protected void onBackSwipe() {
+      // show the next quote
+      ImageView imageView = (ImageView) activity.findViewById(R.id.next_quote_icon);
+      getNextQuote(imageView);
+    }
+
+    @Override
+    protected void onForwardSwipe() {
+      // go to saved quotes activity
+      ImageView imageView = (ImageView) activity.findViewById(R.id.saved_quotes_icon);
+      showSavedQuotes(imageView);
+    }
+
+    @Override
+    protected void onNear() {
+      // save a quote on main activity
+    }
+
+    @Override
+    protected void onFar() {    }
   }
 }
