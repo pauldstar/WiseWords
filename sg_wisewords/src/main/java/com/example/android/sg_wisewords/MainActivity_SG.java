@@ -38,7 +38,7 @@ public class MainActivity_SG extends Activity {
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
     // check if gesture controls are enabled on the vuzix device
-    gestureSensor = new MainGestureSensor(this, this);
+    gestureSensor = new MainGestureSensor(this);
     android.util.Log.d("Gesture","SmartGlass module");
     if (GestureSensor.isOn())
       android.util.Log.d("Gesture","GestureSensor is ON");
@@ -76,25 +76,25 @@ public class MainActivity_SG extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
-    if (!GestureSensor.isOn()) gestureSensor.register();
+    if (gestureSensor != null) gestureSensor.register();
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    if (!GestureSensor.isOn()) gestureSensor.unregister();
+    if (gestureSensor != null) gestureSensor.unregister();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    if (!GestureSensor.isOn()) gestureSensor.unregister();
+    if (gestureSensor != null) gestureSensor.unregister();
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    if (!GestureSensor.isOn()) gestureSensor.unregister();
+    if (gestureSensor != null) gestureSensor.unregister();
   }
 
   // executed when the right_arrow_icon is clicked
@@ -105,9 +105,11 @@ public class MainActivity_SG extends Activity {
 
   // executed when the right_arrow_icon is clicked
   private void showSavedQuotes() {
-    // decrement quote index using modulo; to ensure we see same quote on return to MainActivity_SG
-    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+    /** No longer have to decrement using modulo. onCreate is no longer being called whenever
+     * returning from SavedQuotes activity; because I use finish() method.
+     quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
+     if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+     */
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -182,33 +184,34 @@ public class MainActivity_SG extends Activity {
   // Gesture sensor class for MainActivity_SG
   private class MainGestureSensor extends GestureSensor {
 
-    private Activity activity;
-
-    public MainGestureSensor(Context context, Activity activity) {
+    public MainGestureSensor(Context context) {
       super(context);
-      this.activity = activity;
     }
 
     @Override
     protected void onBackSwipe(int speed) {
+      Log.d("Gesture", "BackSwipe");
       // show the next quote
       getNextQuote();
     }
 
     @Override
     protected void onForwardSwipe(int speed) {
+      Log.d("Gesture", "ForwardSwipe");
       // go to saved quotes activity
       showSavedQuotes();
     }
 
     @Override
     protected void onNear() {
+      Log.d("Gesture", "OnNear");
       // save a quote from main activity
       saveQuote();
     }
 
     @Override
     protected void onFar() {
+      Log.d("Gesture", "OnFar");
       // also save a quote from main activity
       saveQuote();
     }
