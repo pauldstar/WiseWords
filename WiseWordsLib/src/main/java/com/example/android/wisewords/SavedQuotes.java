@@ -3,6 +3,7 @@ package com.example.android.wisewords;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,21 +15,23 @@ import java.util.HashMap;
 
 public class SavedQuotes extends AppCompatActivity {
 
-  private static SimpleAdapter savedQuotesAdapter;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_saved_quotes);
+    // add UP arrow on action bar
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     // retrieve quotes array list from intent, and use as dummy data to populate saved quotes
     Intent intent = getIntent();
     Bundle extras = intent.getExtras();
     ArrayList<String> quoteTextList = extras.getStringArrayList("quoteTextList");
     ArrayList<String> quoteAuthorList = extras.getStringArrayList("quoteAuthorList");
     ArrayList<HashMap<String, String>> quoteMapList = new ArrayList<>();
-    // create and populate hash map to hold the quotes (key) and their save dates (value): today
+    SimpleAdapter savedQuotesAdapter; // adapter for list view
+    // adapter requires a list of maps; each map having key-value pair
     HashMap<String, String> quoteMap = new HashMap<>();
-    String[] from = {"trimmedQuoteText", "saveDate", "fullQuoteText", "quoteAuthor"}; // column names (map keys)
+    // save key names in an array for the adapter
+    String[] fromKeys = {"trimmedQuoteText", "saveDate", "fullQuoteText", "quoteAuthor"};
     int listSize = quoteTextList.size();
     String quoteText, trimmedQuoteText;
     for (int index = 0; index < listSize; index++) {
@@ -44,11 +47,11 @@ public class SavedQuotes extends AppCompatActivity {
       quoteMap = new HashMap<>();
     }
     // the list views to be populated
-    int[] to = {R.id.trimmed_saved_quote_text, R.id.saved_quote_date,
+    int[] toViews = {R.id.trimmed_saved_quote_text, R.id.saved_quote_date,
             R.id.hidden_full_saved_quote_text, R.id.hidden_saved_quote_author};
     // initialise adapter and bind to list view
     savedQuotesAdapter = new SimpleAdapter(
-            this, quoteMapList, R.layout.list_item_saved_quote, from, to);
+            this, quoteMapList, R.layout.list_item_saved_quote, fromKeys, toViews);
     // bind the adaptor to the saved quotes list view to display
     ListView listView = (ListView) findViewById(R.id.listview_saved_quotes);
     listView.setAdapter(savedQuotesAdapter);
@@ -75,5 +78,16 @@ public class SavedQuotes extends AppCompatActivity {
         startActivity(intent);
       }
     });
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      // Respond to the action bar's Up/Home button
+      case android.R.id.home:
+        finish();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

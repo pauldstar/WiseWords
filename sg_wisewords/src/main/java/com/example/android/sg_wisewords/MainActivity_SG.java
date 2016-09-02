@@ -22,13 +22,12 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity_SG extends Activity {
 
-  private static final String MAIN_TAG = MainActivity.class.getSimpleName();
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
   private static boolean indexHasGoneFullCycle = true;
-  public static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
+  private static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
   private static ArrayList<Quote> quoteList = new ArrayList<>();
   private static GestureSensor gestureSensor;
 
@@ -39,52 +38,76 @@ public class MainActivity extends Activity {
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
     // check if gesture controls are enabled on the vuzix device
-    GestureSensor gestureSensor;
-    if (!GestureSensor.isOn()) {
-      android.util.Log.i("Gesture", "GestureSensor is ON");
-      gestureSensor = new MainGestureSensor(this, this);
+    gestureSensor = new MainGestureSensor(this, this);
+    android.util.Log.d("Gesture","SmartGlass module");
+    if (GestureSensor.isOn())
+      android.util.Log.d("Gesture","GestureSensor is ON");
+    else android.util.Log.d("Gesture","GestureSensor is OFF");
+    if (gestureSensor.isCalibrated())
+      android.util.Log.d("Gesture","GestureSensor is calibrated!");
+    else android.util.Log.d("Gesture","GestureSensor is NOT calibrated!");
+    if (GestureSensor.areKeyEventsOn())
+      android.util.Log.d("Gesture","KeyEvents are ON");
+    else {
+      android.util.Log.d("Gesture","KeyEvents are OFF");
+      GestureSensor.KeyEventsOn();
+      String response = GestureSensor.areKeyEventsOn() ? "Yes" : "No";
+      android.util.Log.d("Gesture", "KeyEvents ON now? " + response);
     }
-    else android.util.Log.i("Gesture","GestureSensor is OFF");
     // set the first quote to appear on screen
-    QuoteAsyncTask asyncTask = new QuoteAsyncTask();
-    asyncTask.execute(htmlUrlString);
+    getNextQuote();
+    // set listener on next_icon so a click will change to next quote on list
+    ImageView nextIconImageView = (ImageView) findViewById(R.id.next_quote_icon);
+    nextIconImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { getNextQuote(); }
+    });
+    // set listener on saved_quotes_icon so a click will change to list of saved quotes
+    ImageView savedQuotesImageView = (ImageView) findViewById(R.id.saved_quotes_icon);
+    savedQuotesImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { showSavedQuotes(); }
+    });
+    // set listener on save_quote_icon so a click save quote in database
+    ImageView saveQuoteImageView = (ImageView) findViewById(R.id.save_quote_icon);
+    saveQuoteImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { saveQuote(); }
+    });
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
-    // Decrementing using modulo; make sure we view same quote on return to MainActivity
-    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+    if (!GestureSensor.isOn()) gestureSensor.register();
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+    if (!GestureSensor.isOn()) gestureSensor.unregister();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+    if (!GestureSensor.isOn()) gestureSensor.unregister();
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    /**if (!GestureSensor.isOn()) gestureSensor.register();*/
+    if (!GestureSensor.isOn()) gestureSensor.unregister();
   }
 
   // executed when the right_arrow_icon is clicked
-  public void getNextQuote(View view) {
+  private void getNextQuote() {
     QuoteAsyncTask asyncTask = new QuoteAsyncTask();
     asyncTask.execute(htmlUrlString);
   }
 
   // executed when the right_arrow_icon is clicked
-  public void showSavedQuotes(View view) {
+  private void showSavedQuotes() {
+    // decrement quote index using modulo; to ensure we see same quote on return to MainActivity_SG
+    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
+    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -102,6 +125,11 @@ public class MainActivity extends Activity {
     extras.putStringArrayList("quoteAuthorList", quoteAuthorList);
     intent.putExtras(extras);
     startActivity(intent);
+  }
+
+  // save a quote from main activity
+  private void saveQuote() {
+
   }
 
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
@@ -136,7 +164,6 @@ public class MainActivity extends Activity {
         }
         catch (IOException e) { e.printStackTrace(); }
       }
-
       return null;
     }
 
@@ -145,14 +172,14 @@ public class MainActivity extends Activity {
       Log.d(ASYNC_TAG, "QuotesSize: " + quoteList.size() + " QuoteIndex: " + quoteIndex);
       quoteTextTView.setText(quoteList.get(quoteIndex).getQuoteText());
       quoteAuthorTView.setText(quoteList.get(quoteIndex).getQuoteAuthor());
-      // set the index to point to the next item on the list
+      // increment index to point to the next item on the list
       // when it comes back to zero, then we reload some more quotes
       if (quoteIndex == 19) indexHasGoneFullCycle = true;
       quoteIndex = (quoteIndex + 1) % quoteList.size();
     }
   }
 
-  // Gesture sensor class for MainActivity
+  // Gesture sensor class for MainActivity_SG
   private class MainGestureSensor extends GestureSensor {
 
     private Activity activity;
@@ -163,25 +190,27 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onBackSwipe() {
+    protected void onBackSwipe(int speed) {
       // show the next quote
-      ImageView imageView = (ImageView) activity.findViewById(R.id.next_quote_icon);
-      getNextQuote(imageView);
+      getNextQuote();
     }
 
     @Override
-    protected void onForwardSwipe() {
+    protected void onForwardSwipe(int speed) {
       // go to saved quotes activity
-      ImageView imageView = (ImageView) activity.findViewById(R.id.saved_quotes_icon);
-      showSavedQuotes(imageView);
+      showSavedQuotes();
     }
 
     @Override
     protected void onNear() {
-      // save a quote on main activity
+      // save a quote from main activity
+      saveQuote();
     }
 
     @Override
-    protected void onFar() {    }
+    protected void onFar() {
+      // also save a quote from main activity
+      saveQuote();
+    }
   }
 }

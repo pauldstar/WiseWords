@@ -11,16 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <!-- launcher category makes this the activity that gets shown first -->
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:theme="@style/MainTheme">
             <intent-filter>
@@ -31,15 +21,13 @@
         </activity>
         <activity
             android:name=".SavedQuotes"
-            android:label="@string/title_activity_saved_quotes"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.wisewords.MainActivity"/>
+            android:label="@string/title_activity_saved_quotes">
         </activity>
         <activity
             android:name=".SavedQuoteDetail"
-            android:theme="@style/MainTheme">
+            android:theme="@style/MainTheme"
+            android:parentActivityName=".SavedQuotes">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.wisewords.SavedQuotes"/>

@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.android.sg_wisewords">
+          package="com.example.android.sp_wisewords">
 
     <application
         android:allowBackup="true"
@@ -9,22 +8,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.android.sg_wisewords.SplashActivity"
+            android:name="com.example.android.sp_wisewords.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <!-- launcher category makes this the activity that gets shown first -->
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity_SG"
-            android:theme="@style/MainTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.MainActivity"/>
             </intent-filter>
         </activity>
     </application>

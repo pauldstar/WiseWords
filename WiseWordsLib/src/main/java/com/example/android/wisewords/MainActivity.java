@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -31,22 +32,39 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
+    android.util.Log.d("Gesture","Phone module");
     // set the first quote to appear on screen
+    getNextQuote();
+    // set listener on next_icon so a click will change to next quote on list
+    ImageView nextIconImageView = (ImageView) findViewById(R.id.next_quote_icon);
+    nextIconImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { getNextQuote(); }
+    });
+    // set listener on saved_quotes_icon so a click will change to list of saved quotes
+    ImageView savedQuotesImageView = (ImageView) findViewById(R.id.saved_quotes_icon);
+    savedQuotesImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { showSavedQuotes(); }
+    });
+    // set listener on save_quote_icon so a click save quote in database
+    ImageView saveQuoteImageView = (ImageView) findViewById(R.id.save_quote_icon);
+    saveQuoteImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) { saveQuote(); }
+    });
+  }
+
+  // executed when the right_arrow_icon is clicked
+  public void getNextQuote() {
     QuoteAsyncTask asyncTask = new QuoteAsyncTask();
     asyncTask.execute(htmlUrlString);
   }
 
   // executed when the right_arrow_icon is clicked
-  public void getNextQuote(View view) {
-    QuoteAsyncTask asyncTask = new QuoteAsyncTask();
-    asyncTask.execute(htmlUrlString);
-  }
-
-  // executed when the right_arrow_icon is clicked
-  public void showSavedQuotes(View view) {
-    // Decrementing using modulo; make sure we view same quote on return to MainActivity
+  public void showSavedQuotes() {
+    /** No longer have to decrement using modulo. onCreate is no longer being called whenever
+     * returning from SavedQuotes activity; because I use finish() method.
     quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
     if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
+     */
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -66,6 +84,11 @@ public class MainActivity extends Activity {
     startActivity(intent);
   }
 
+  // save a quote from main activity
+  public void saveQuote() {
+    return;
+  }
+
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
 
     private final String ASYNC_TAG = QuoteAsyncTask.class.getSimpleName();
@@ -74,8 +97,8 @@ public class MainActivity extends Activity {
     protected Void doInBackground(String... params) {
       // below line for debugging; allows breakpoints to be set for the background method
       /*android.os.Debug.waitForDebugger();*/
-
       String htmlPageUrl = params[0];
+      // only access the internet when we've exhausted the current quoteList
       if (quoteIndex == 0 && indexHasGoneFullCycle) {
         try {
           indexHasGoneFullCycle = false;

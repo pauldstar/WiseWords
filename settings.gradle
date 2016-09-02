@@ -1,2 +1,2 @@
+include ':app', ':wisewordslib', ':sp_wisewords'
 include ':app', ':sg_wisewords'
-include ':app', ':wisewordslib'
