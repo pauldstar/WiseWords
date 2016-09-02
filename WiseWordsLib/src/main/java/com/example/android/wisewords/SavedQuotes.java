@@ -85,6 +85,8 @@ public class SavedQuotes extends AppCompatActivity {
     switch (item.getItemId()) {
       // Respond to the action bar's Up/Home button
       case android.R.id.home:
+        // kill activity to resume previous activity on back stack
+        // (without calling onResume or onCreate of the activity)
         finish();
         return true;
     }

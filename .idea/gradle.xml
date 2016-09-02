@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/WiseWordsLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/sg_wisewords" />
+            <option value="$PROJECT_DIR$/sp_wisewords" />
           </set>
         </option>
         <option name="myModules">
@@ -20,6 +21,7 @@
             <option value="$PROJECT_DIR$/WiseWordsLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/sg_wisewords" />
+            <option value="$PROJECT_DIR$/sp_wisewords" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -22,7 +22,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity_SG extends Activity {
+public class MainActivitySG extends Activity {
 
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
@@ -105,11 +105,6 @@ public class MainActivity_SG extends Activity {
 
   // executed when the right_arrow_icon is clicked
   private void showSavedQuotes() {
-    /** No longer have to decrement using modulo. onCreate is no longer being called whenever
-     * returning from SavedQuotes activity; because I use finish() method.
-     quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-     if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
-     */
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -181,7 +176,7 @@ public class MainActivity_SG extends Activity {
     }
   }
 
-  // Gesture sensor class for MainActivity_SG
+  // Gesture sensor class for MainActivitySG
   private class MainGestureSensor extends GestureSensor {
 
     public MainGestureSensor(Context context) {

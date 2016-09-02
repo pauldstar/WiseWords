@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="vuzix_gesture">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sg_wisewords/libs/vuzix_gesture.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-  private static final String MAIN_TAG = MainActivity.class.getSimpleName();
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex = 0;
   private static boolean indexHasGoneFullCycle = true;
@@ -60,11 +59,6 @@ public class MainActivity extends Activity {
 
   // executed when the right_arrow_icon is clicked
   public void showSavedQuotes() {
-    /** No longer have to decrement using modulo. onCreate is no longer being called whenever
-     * returning from SavedQuotes activity; because I use finish() method.
-    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
-     */
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -86,7 +80,7 @@ public class MainActivity extends Activity {
 
   // save a quote from main activity
   public void saveQuote() {
-    return;
+
   }
 
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {

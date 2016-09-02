@@ -16,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
      * we launch the main activity
      * while the activity loads the splash screen would be visible
      */
-    Intent intent = new Intent(this, MainActivity_SG.class);
+    Intent intent = new Intent(this, MainActivitySG.class);
     startActivity(intent);
     finish();
   }
