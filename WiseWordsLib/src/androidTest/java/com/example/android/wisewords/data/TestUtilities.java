@@ -2,9 +2,15 @@ package com.example.android.wisewords.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.test.AndroidTestCase;
+
+import com.example.android.wisewords.utils.PollingCheck;
 
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +26,7 @@ public class TestUtilities extends AndroidTestCase {
 
   static ContentValues createTestQuoteValues() {
     ContentValues quoteValues = new ContentValues();
-    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, "Feed the spirit, starve the flesh");
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, "Chat rubbish, get banged!");
     quoteValues.put(QuoteContract.QuoteEntry.COLUMN_AUTHOR, "Paul Ogbeiwi");
     quoteValues.put(QuoteContract.QuoteEntry.COLUMN_DATE, TEST_DATE); // Oct 19, 2016
     return quoteValues;
@@ -63,7 +69,8 @@ public class TestUtilities extends AndroidTestCase {
       Note that this only tests that the onChange function is called; it does not test that the
       correct Uri is returned.
    */
-  /*static class TestContentObserver extends ContentObserver {
+  static class TestContentObserver extends ContentObserver {
+
     final HandlerThread mHT;
     boolean mContentChanged;
 
@@ -106,5 +113,5 @@ public class TestUtilities extends AndroidTestCase {
 
   static TestContentObserver getTestContentObserver() {
     return TestContentObserver.getTestContentObserver();
-  }*/
+  }
 }
