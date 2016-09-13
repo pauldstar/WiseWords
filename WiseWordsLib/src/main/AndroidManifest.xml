@@ -32,6 +32,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.wisewords.SavedQuotes"/>
         </activity>
+        <provider
+            android:authorities="com.example.android.wisewords"
+            android:name=".data.QuoteProvider"/>
     </application>
 
 </manifest>

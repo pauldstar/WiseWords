@@ -86,7 +86,15 @@ public class MainActivity extends Activity {
 
   // save a quote from main activity
   public void saveQuote() {
-    return;
+    // first check if quote already exists in database to prevent duplication
+    /**Context thisContext = this;
+    QuoteDBHelper dbHelper = new QuoteDBHelper(thisContext);
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+    String[] projection = QuoteContract.QuoteEntry.getFullQuoteProjection();
+    String text = quoteList.get(quoteIndex).getQuoteText();
+    String author = quoteList.get(quoteIndex).getQuoteAuthor();
+    Cursor quoteCursor = thisContext.getContentResolver().query(QuoteContract.QuoteEntry.
+            buildQuoteUriWithTextAndAuthor(text, author), projection, null, null, null);*/
   }
 
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
@@ -121,7 +129,6 @@ public class MainActivity extends Activity {
         }
         catch (IOException e) { e.printStackTrace(); }
       }
-
       return null;
     }
 
