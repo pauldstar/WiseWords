@@ -10,5 +10,4 @@
     <string name="title_activity_saved_quotes">Saved Quotes</string>
     <string name="action_settings">Settings</string>
     <string name="placeholder_date_text">19 OCT, 91</string>
-    <string name="content_authorities">com.example.android.wisewords</string>
 </resources>

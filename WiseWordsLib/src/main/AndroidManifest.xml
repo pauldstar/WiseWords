@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.android.wisewords">
-    // permission to access the internet
+    <!--permission to access the internet-->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--<uses-permission android:name="wisewords.READ_DATABASE" />-->
+    <!--<uses-permission android:name="wisewords.WRITE_DATABASE" />-->
 
     <application
         android:allowBackup="true"
@@ -10,6 +13,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name="com.example.android.wisewords.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <!-- launcher category makes this the activity that gets shown first -->
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/MainTheme">
@@ -33,8 +46,13 @@
                 android:value="com.example.android.wisewords.SavedQuotes"/>
         </activity>
         <provider
-            android:authorities="@string/content_authorities"
-            android:name=".data.QuoteProvider"/>
+            android:authorities="com.example.android.wisewords.ContentProvider"
+            android:name=".data.QuoteProvider"
+            android:exported="true"
+            android:readPermission="wisewords.READ_DATABASE"
+            android:writePermission="wisewords.WRITE_DATABASE"/>
+        <!--In the provider, "exported = true" indicates that the provider is available
+        for other apps to use-->
     </application>
 
 </manifest>

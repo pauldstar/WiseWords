@@ -1,6 +1,5 @@
 package com.example.android.wisewords;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,7 +20,6 @@ public class SavedQuotes extends AppCompatActivity
 
   private static final int QUOTE_LOADER_ID = 0;
   private QuoteAdapter savedQuotesAdapter;
-  private Context thisContext = this;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +30,7 @@ public class SavedQuotes extends AppCompatActivity
     // retrieve quote list cursor with descending sort order by date
     String sortOrder = QuoteContract.QuoteEntry.COLUMN_DATE + " DESC";
     Uri quoteListUri = QuoteContract.QuoteEntry.buildQuoteListUri();
-    Cursor cursor = thisContext.getContentResolver().query(
-            quoteListUri, null, null, null, sortOrder);
+    Cursor cursor = getContentResolver().query(quoteListUri, null, null, null, sortOrder);
     /** // retrieve quotes array list from intent, and use as dummy data to populate saved quotes
     Intent intent = getIntent();
     Bundle extras = intent.getExtras();
