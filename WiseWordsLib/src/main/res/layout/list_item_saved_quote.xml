@@ -45,4 +45,10 @@
         android:id="@+id/hidden_saved_quote_author"
         android:visibility="gone"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/hidden_saved_quote_id"
+        android:visibility="gone"/>
+
 </LinearLayout>

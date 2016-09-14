@@ -33,7 +33,7 @@
                 android:value="com.example.android.wisewords.SavedQuotes"/>
         </activity>
         <provider
-            android:authorities="com.example.android.wisewords"
+            android:authorities="@string/content_authorities"
             android:name=".data.QuoteProvider"/>
     </application>
 

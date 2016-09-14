@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WiseWords</string>
+    <string name="content_authorities">com.example.android.sp_wisewords</string>
 </resources>

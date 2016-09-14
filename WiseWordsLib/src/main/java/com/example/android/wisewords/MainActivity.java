@@ -97,6 +97,10 @@ public class MainActivity extends Activity {
             buildQuoteUriWithTextAndAuthor(text, author), projection, null, null, null);*/
   }
 
+  public static void setQuoteTextTView(String text) {
+
+  }
+
   private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
 
     private final String ASYNC_TAG = QuoteAsyncTask.class.getSimpleName();
