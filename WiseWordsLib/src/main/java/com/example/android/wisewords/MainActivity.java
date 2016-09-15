@@ -88,11 +88,12 @@ public class MainActivity extends Activity {
 
   // save a quote from main activity
   public void saveQuote() {
-    // since quoteIndex has already been incremented, use the previous index
-    int previousIndex = quoteIndex - 1;
-    // first check if quote already exists in database to prevent duplication
+    // quoteIndex has already been incremented, so using the previous index
+    // decrementing using modulo; so we save the quote currently on view on MainActivity
+    int previousIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
     String quoteText = quoteList.get(previousIndex).getQuoteText();
     String quoteAuthor = quoteList.get(previousIndex).getQuoteAuthor();
+    // first check if quote already exists in database to prevent duplication
     Uri quoteUriWithTextAndAuthor = QuoteContract.QuoteEntry.
             buildQuoteUriWithTextAndAuthor(quoteText, quoteAuthor);
     Cursor cursor = getContentResolver().query(quoteUriWithTextAndAuthor, null, null, null, null);
