@@ -71,6 +71,7 @@ public class QuoteContract {
     /** function to build URI to access a quote using it's text and author:
      * content/authority/quote/text/author */
     public static Uri buildQuoteUriWithTextAndAuthor(String text, String author) {
+      // TODO: 15/09/2016 build this using uri queries instead of paths
       return CONTENT_URI.buildUpon().appendPath(text).appendPath(author).build();
     }
 

@@ -3,6 +3,7 @@ package com.example.android.wisewords;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,9 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.wisewords.data.QuoteContract;
-import com.example.android.wisewords.data.QuoteProvider;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,6 +22,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends Activity {
 
@@ -91,18 +93,29 @@ public class MainActivity extends Activity {
 
   // save a quote from main activity
   public void saveQuote() {
+    // since quoteIndex has already been incremented, use the previous index
+    int previousIndex = quoteIndex - 1;
     // first check if quote already exists in database to prevent duplication
-    String quoteText = quoteList.get(quoteIndex).getQuoteText();
-    String quoteAuthor = quoteList.get(quoteIndex).getQuoteAuthor();
-    Uri uri = QuoteContract.QuoteEntry.CONTENT_URI; // content://.../quote
-    getContentResolver().query(uri, null, QuoteProvider.)
-
-
-
+    String quoteText = quoteList.get(previousIndex).getQuoteText();
+    String quoteAuthor = quoteList.get(previousIndex).getQuoteAuthor();
+    Uri quoteUriWithTextAndAuthor = QuoteContract.QuoteEntry.
+            buildQuoteUriWithTextAndAuthor(quoteText, quoteAuthor);
+    Cursor cursor = getContentResolver().query(quoteUriWithTextAndAuthor, null, null, null, null);
+    if (cursor.getCount() != 0) {
+      Toast toast = Toast.makeText(this, "Quote already saved!", Toast.LENGTH_SHORT);
+      toast.show();
+      return;
+    }
+    // quote doesn't already exist, so save quote.
     ContentValues quoteValues = new ContentValues();
-    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, quoteList.get(quoteIndex).getQuoteText());
-    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_AUTHOR, quoteList.get(quoteIndex).getQuoteAuthor());
-    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_DATE, TEST_DATE);
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, quoteText);
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_AUTHOR, quoteAuthor);
+    long date = Calendar.getInstance().getTimeInMillis(); // gets the datetime for right now
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_DATE, date);
+    // insert into db
+    getContentResolver().insert(QuoteContract.QuoteEntry.CONTENT_URI, quoteValues);
+    Toast toast = Toast.makeText(this, "Quote saved!", Toast.LENGTH_SHORT);
+    toast.show();
     /**String[] projection = QuoteContract.QuoteEntry.getFullQuoteProjection();
     String text = quoteList.get(quoteIndex).getQuoteText();
     String author = quoteList.get(quoteIndex).getQuoteAuthor();

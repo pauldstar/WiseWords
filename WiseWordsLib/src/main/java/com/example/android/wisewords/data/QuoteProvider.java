@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
+import java.util.List;
+
 /**
  * Created by po482951 on 19/08/2016.
  */
@@ -23,6 +25,8 @@ public class QuoteProvider extends ContentProvider {
   static final int QUOTE_WITH_TEXT_AUTHOR = 103;
   // variable used to build queries from database tables (possibly JOINed)
   private static final SQLiteQueryBuilder quoteQueryBuilder = initialiseQueryBuilder();
+  // selection: _ID = ?
+  private static final String quoteIDSelection = QuoteContract.QuoteEntry._ID + " = ? ";
   // selection: text = ? AND author = ?
   private static final String quoteTextAuthorSelection = QuoteContract.QuoteEntry.COLUMN_TEXT +
           " = ? AND " + QuoteContract.QuoteEntry.COLUMN_AUTHOR + " = ? ";
@@ -50,21 +54,11 @@ public class QuoteProvider extends ContentProvider {
   @Override
   public Uri insert(Uri uri, ContentValues contentValues) {
     final SQLiteDatabase db = openHelper.getWritableDatabase();
-    final int match = uriMatcher.match(uri);
     Uri returnUri;
-    switch (match) {
-      case QUOTE: {
-        normaliseContentValuesDate(contentValues);
-        long _id = db.insert(QuoteContract.QuoteEntry.TABLE_NAME, null, contentValues);
-        if (_id > 0)
-          returnUri = QuoteContract.QuoteEntry.buildQuoteUriWithID(_id);
-        else
-          throw new android.database.SQLException("Failed to insert row into " + uri);
-        break;
-      }
-      default:
-        throw new UnsupportedOperationException("Unknown uri: " + uri);
-    }
+    normaliseContentValuesDate(contentValues);
+    long _id = db.insert(QuoteContract.QuoteEntry.TABLE_NAME, null, contentValues);
+    if (_id > 0) returnUri = QuoteContract.QuoteEntry.buildQuoteUriWithID(_id);
+    else throw new android.database.SQLException("Failed to insert row into " + uri);
     getContext().getContentResolver().notifyChange(uri, null);
     return returnUri;
   }
@@ -124,6 +118,8 @@ public class QuoteProvider extends ContentProvider {
     switch (matchCode) {
       // either case of quotes with ID or text-author should implement the same way
       case QUOTE_WITH_ID: {
+        selection = quoteIDSelection;
+        selectionArgs = new String[]{uri.getLastPathSegment()};
         retCursor = openHelper.getReadableDatabase().query(QuoteContract.QuoteEntry.TABLE_NAME,
                 projection, selection, selectionArgs, null, null, sortOrder);
         break;
@@ -131,7 +127,11 @@ public class QuoteProvider extends ContentProvider {
       // either case of quotes with ID or text-author should implement the same way
       case QUOTE_WITH_TEXT_AUTHOR: {
         selection = quoteTextAuthorSelection;
-        selectionArgs = new String[]
+        // TODO: 15/09/2016 collect uri queries instead of path segments
+        selectionArgs = new String[2];
+        List<String> selectionArgsList = uri.getPathSegments();
+        for (int index = 1; index < selectionArgsList.size(); index++)
+          selectionArgs[index - 1] = selectionArgsList.get(index);
         retCursor = openHelper.getReadableDatabase().query(QuoteContract.QuoteEntry.TABLE_NAME,
                 projection, selection, selectionArgs, null, null, sortOrder);
         break;
@@ -150,31 +150,30 @@ public class QuoteProvider extends ContentProvider {
     return retCursor;
   }
 
-  /**@Override
-  public int bulkInsert(Uri uri, ContentValues[] values) {
-    final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-    final int match = sUriMatcher.match(uri);
-    switch (match) {
-      case WEATHER:
-        db.beginTransaction();
-        int returnCount = 0;
-        try {
-          for (ContentValues value : values) {
-            normalizeDate(value);
-            long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
-            if (_id != -1) {
-              returnCount++;
-            }
-          }
-          db.setTransactionSuccessful();
-        } finally {
-          db.endTransaction();
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return returnCount;
-      default:
-        return super.bulkInsert(uri, values);
-    }
+  /**@Override public int bulkInsert(Uri uri, ContentValues[] values) {
+  final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+  final int match = sUriMatcher.match(uri);
+  switch (match) {
+  case WEATHER:
+  db.beginTransaction();
+  int returnCount = 0;
+  try {
+  for (ContentValues value : values) {
+  normalizeDate(value);
+  long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
+  if (_id != -1) {
+  returnCount++;
+  }
+  }
+  db.setTransactionSuccessful();
+  } finally {
+  db.endTransaction();
+  }
+  getContext().getContentResolver().notifyChange(uri, null);
+  return returnCount;
+  default:
+  return super.bulkInsert(uri, values);
+  }
   }*/
 
   /**

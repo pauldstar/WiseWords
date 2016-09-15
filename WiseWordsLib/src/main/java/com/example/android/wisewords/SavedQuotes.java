@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,8 +29,7 @@ public class SavedQuotes extends AppCompatActivity
     // add "up" arrow on action bar
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     // initialise cursor loader. either re-connect with an existing one, or start a new one.
-    getLoaderManager().initLoader(
-            QUOTE_LOADER_ID, null, (android.app.LoaderManager.LoaderCallbacks<Cursor>) this);
+    getLoaderManager().initLoader(QUOTE_LOADER_ID, null, this);
     /** // retrieve quotes array list from intent, and use as dummy data to populate saved quotes
     Intent intent = getIntent();
     Bundle extras = intent.getExtras();
