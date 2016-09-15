@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90ee5850-76e1-4f79-bceb-bc795d937d10" name="Default" comment="">
+
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_0.xml" />
@@ -23,6 +24,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/wisewordslib.iml" afterPath="$PROJECT_DIR$/WiseWordsLib/wisewordslib.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sg_wisewords/sg_wisewords.iml" afterPath="$PROJECT_DIR$/sg_wisewords/sg_wisewords.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sp_wisewords/sp_wisewords.iml" afterPath="$PROJECT_DIR$/sp_wisewords/sp_wisewords.iml" />
@@ -93,9 +95,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,8 +103,10 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WiseWordsLib/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
+
             <state vertical-scroll-proportion="0.19379845">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+
               <folding>
                 <element signature="e#633#1073#0" expanded="false" />
                 <element signature="e#1082#1404#0" expanded="false" />
@@ -1619,6 +1621,7 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/WiseWordsLib" />
                 <option name="name" value="validateDebugSigning" />
+
               </ExternalTaskPojo>
             </list>
           </value>
@@ -1629,14 +1632,22 @@
               <ExternalTaskPojo>
                 <option name="description" value="Displays all buildscript dependencies declared in project ':app'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="buildEnvironment" />
+
               </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app">
+          <value>
+            <list>
               <ExternalTaskPojo>
+
                 <option name="description" value="Displays the components produced by project ':app'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+
                 <option name="description" value="Displays all dependencies declared in project ':app'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="dependencies" />
@@ -2679,6 +2690,7 @@
                 <option name="description" value="Runs lint on the Release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/sp_wisewords" />
                 <option name="name" value="lintRelease" />
+
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on just the fatal issues in the Release build." />
@@ -2686,6 +2698,7 @@
                 <option name="name" value="lintVitalRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/sp_wisewords" />
                 <option name="name" value="mergeDebugAndroidTestAssets" />
               </ExternalTaskPojo>
@@ -3771,9 +3784,11 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="Scope" />
+
       <pane id="Scratches">
         <subPane />
       </pane>
+
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -4233,8 +4248,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
+
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928944" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.77700347" sideWeight="0.49314025" order="8" side_tool="false" content_ui="tabs" />
@@ -4366,7 +4383,15 @@
     <entry file="file://$PROJECT_DIR$/sp_wisewords/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WiseWordsLib/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -4375,12 +4400,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WiseWordsLib/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="e#633#1073#0" expanded="false" />
+            <element signature="e#1082#1404#0" expanded="false" />
+            <element signature="e#1413#1547#0" expanded="false" />
+            <element signature="e#1556#1964#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+
+
     <entry file="file://$PROJECT_DIR$/WiseWordsLib/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4701,9 +4739,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4740,8 +4776,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WiseWordsLib/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
+
         <state vertical-scroll-proportion="0.19379845">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+
           <folding>
             <element signature="e#633#1073#0" expanded="false" />
             <element signature="e#1082#1404#0" expanded="false" />
