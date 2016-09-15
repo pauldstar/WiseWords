@@ -67,11 +67,6 @@ public class MainActivity extends Activity {
 
   // executed when the right_arrow_icon is clicked
   public void showSavedQuotes() {
-    /** No longer have to decrement using modulo. onCreate is no longer being called whenever
-     * returning from SavedQuotes activity; because I use finish() method.
-    quoteIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
-    if (indexHasGoneFullCycle) indexHasGoneFullCycle = false;
-     */
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();
     ArrayList<String> quoteAuthorList = new ArrayList<>();
@@ -116,11 +111,6 @@ public class MainActivity extends Activity {
     getContentResolver().insert(QuoteContract.QuoteEntry.CONTENT_URI, quoteValues);
     Toast toast = Toast.makeText(this, "Quote saved!", Toast.LENGTH_SHORT);
     toast.show();
-    /**String[] projection = QuoteContract.QuoteEntry.getFullQuoteProjection();
-    String text = quoteList.get(quoteIndex).getQuoteText();
-    String author = quoteList.get(quoteIndex).getQuoteAuthor();
-    Cursor quoteCursor = thisContext.getContentResolver().query(QuoteContract.QuoteEntry.
-            buildQuoteUriWithTextAndAuthor(text, author), projection, null, null, null);*/
   }
 
   public static void setQuoteTextTView(String text) {

@@ -55,7 +55,6 @@ public class QuoteProvider extends ContentProvider {
   public Uri insert(Uri uri, ContentValues contentValues) {
     final SQLiteDatabase db = openHelper.getWritableDatabase();
     Uri returnUri;
-    normaliseContentValuesDate(contentValues);
     long _id = db.insert(QuoteContract.QuoteEntry.TABLE_NAME, null, contentValues);
     if (_id > 0) returnUri = QuoteContract.QuoteEntry.buildQuoteUriWithID(_id);
     else throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -66,22 +65,14 @@ public class QuoteProvider extends ContentProvider {
   @Override
   public int delete(Uri uri, String selection, String[] selectionArgs) {
     final SQLiteDatabase db = openHelper.getWritableDatabase();
-    final int match = uriMatcher.match(uri);
     int rowsDeleted;
-    // this makes delete all rows return the number of rows deleted
-    if (selection == null) selection = "1";
-    switch (match) {
-      case QUOTE_WITH_ID:
-        rowsDeleted = db.delete(
-                QuoteContract.QuoteEntry.TABLE_NAME, selection, selectionArgs);
-        break;
-      default:
-        throw new UnsupportedOperationException("Unknown uri: " + uri);
-    }
+    /** // this makes delete all rows return the number of rows deleted
+     if (selection == null) selection = "1";*/
+    selection = quoteIDSelection;
+    rowsDeleted = db.delete(QuoteContract.QuoteEntry.TABLE_NAME, selection, selectionArgs);
     // Because a null deletes all rows
-    if (rowsDeleted != 0) {
+    if (rowsDeleted != 0)
       getContext().getContentResolver().notifyChange(uri, null);
-    }
     return rowsDeleted;
   }
 
@@ -93,7 +84,6 @@ public class QuoteProvider extends ContentProvider {
     int rowsUpdated;
     switch (match) {
       case QUOTE_WITH_ID:
-        normaliseContentValuesDate(contentValues);
         rowsUpdated = db.update(QuoteContract.QuoteEntry.TABLE_NAME, contentValues, selection,
                 selectionArgs);
         break;
@@ -150,31 +140,32 @@ public class QuoteProvider extends ContentProvider {
     return retCursor;
   }
 
-  /**@Override public int bulkInsert(Uri uri, ContentValues[] values) {
-  final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-  final int match = sUriMatcher.match(uri);
-  switch (match) {
-  case WEATHER:
-  db.beginTransaction();
-  int returnCount = 0;
-  try {
-  for (ContentValues value : values) {
-  normalizeDate(value);
-  long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
-  if (_id != -1) {
-  returnCount++;
-  }
-  }
-  db.setTransactionSuccessful();
-  } finally {
-  db.endTransaction();
-  }
-  getContext().getContentResolver().notifyChange(uri, null);
-  return returnCount;
-  default:
-  return super.bulkInsert(uri, values);
-  }
-  }*/
+  /**@Override
+  public int bulkInsert(Uri uri, ContentValues[] values) {
+    final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+    final int match = sUriMatcher.match(uri);
+    switch (match) {
+      case WEATHER:
+        db.beginTransaction();
+        int returnCount = 0;
+        try {
+          for (ContentValues value : values) {
+            normalizeDate(value);
+            long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
+            if (_id != -1) {
+              returnCount++;
+            }
+          }
+          db.setTransactionSuccessful();
+        } finally {
+          db.endTransaction();
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnCount;
+      default:
+        return super.bulkInsert(uri, values);
+    }
+  } */
 
   /**
    * Initialise SQLiteQueryBuilder
@@ -211,16 +202,5 @@ public class QuoteProvider extends ContentProvider {
     // TODO: 08/09/2016  try this style of database retrieval for a single quote on line 72
     return quoteQueryBuilder.query(openHelper.getReadableDatabase(), projection, null, null,
             null, null, sortOrder);
-  }
-
-  /**
-   * To make it easy to query for the exact date, we normalize all dates that go into
-   * the database to the start of the the Julian day at UTC.
-   */
-  public static void normaliseContentValuesDate(ContentValues values) {
-    if (values.containsKey(QuoteContract.QuoteEntry.COLUMN_DATE)) {
-      long dateValue = values.getAsLong(QuoteContract.QuoteEntry.COLUMN_DATE);
-      values.put(QuoteContract.QuoteEntry.COLUMN_DATE, QuoteContract.normaliseDate(dateValue));
-    }
   }
 }

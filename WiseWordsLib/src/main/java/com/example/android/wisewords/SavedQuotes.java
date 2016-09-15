@@ -1,12 +1,12 @@
 package com.example.android.wisewords;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,38 +30,8 @@ public class SavedQuotes extends AppCompatActivity
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     // initialise cursor loader. either re-connect with an existing one, or start a new one.
     getLoaderManager().initLoader(QUOTE_LOADER_ID, null, this);
-    /** // retrieve quotes array list from intent, and use as dummy data to populate saved quotes
-    Intent intent = getIntent();
-    Bundle extras = intent.getExtras();
-    ArrayList<String> quoteTextList = extras.getStringArrayList("quoteTextList");
-    ArrayList<String> quoteAuthorList = extras.getStringArrayList("quoteAuthorList");
-    ArrayList<HashMap<String, String>> quoteMapList = new ArrayList<>();*/
+    // create adapter and bind the adaptor to the saved quotes list view to display
     savedQuotesAdapter = new QuoteAdapter(this, null, 0);
-    /** // adapter requires a list of maps; each map having key-value pair
-    HashMap<String, String> quoteMap = new HashMap<>();
-    // save key names in an array for the adapter
-    String[] fromKeys = {"trimmedQuoteText", "saveDate", "fullQuoteText", "quoteAuthor"};
-    int listSize = quoteTextList.size();
-    String quoteText, trimmedQuoteText;
-    for (int index = 0; index < listSize; index++) {
-      quoteText = trimmedQuoteText = quoteTextList.get(index);
-      // trim the quote text to fit the text view
-      if (quoteText.length() > 81) //  reduce length of string to fit text view
-        trimmedQuoteText = quoteText.substring(0, 77) + "...";
-      quoteMap.put("trimmedQuoteText", trimmedQuoteText);
-      quoteMap.put("saveDate", "16 Aug, 16");
-      quoteMap.put("fullQuoteText", quoteText);
-      quoteMap.put("quoteAuthor", quoteAuthorList.get(index));
-      quoteMapList.add(quoteMap);
-      quoteMap = new HashMap<>();
-    }
-    // the list views to be populated
-    int[] toViews = {R.id.trimmed_saved_quote_text, R.id.saved_quote_date,
-            R.id.hidden_full_saved_quote_text, R.id.hidden_saved_quote_author};
-    // initialise adapter and bind to list view
-    savedQuotesAdapter = new SimpleAdapter(
-            this, quoteMapList, R.layout.list_item_saved_quote, fromKeys, toViews);*/
-    // bind the adaptor to the saved quotes list view to display
     ListView listView = (ListView) findViewById(R.id.listview_saved_quotes);
     listView.setAdapter(savedQuotesAdapter);
     // cause a click on an item in the list to launch the detail activity for saved quotes
@@ -75,15 +45,18 @@ public class SavedQuotes extends AppCompatActivity
 
   private void launchSavedQuoteDetail(View view) {
     // get the needed text views associated with that list item
+    TextView quoteIdTV = (TextView) view.findViewById(R.id.hidden_saved_quote_id);
     TextView fullQuoteTextTV = (TextView) view.findViewById(R.id.hidden_full_saved_quote_text);
     TextView dateTextTV = (TextView) view.findViewById(R.id.saved_quote_date);
     TextView quoteAuthorTV = (TextView) view.findViewById(R.id.hidden_saved_quote_author);
     // get the strings from the text views
+    String quoteId = quoteIdTV.getText().toString();
     String fullQuoteText = fullQuoteTextTV.getText().toString();
     String dateText = dateTextTV.getText().toString();
     String quoteAuthor = quoteAuthorTV.getText().toString();
     // add all strings to a bundle
     Bundle quoteItems = new Bundle();
+    quoteItems.putString("quoteId", quoteId);
     quoteItems.putString("fullQuoteText", fullQuoteText);
     quoteItems.putString("dateText", dateText);
     quoteItems.putString("quoteAuthor", quoteAuthor);
