@@ -1,13 +1,18 @@
 package com.example.android.wisewords;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.wisewords.data.QuoteContract;
+import com.example.android.wisewords.data.QuoteProvider;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -87,10 +92,18 @@ public class MainActivity extends Activity {
   // save a quote from main activity
   public void saveQuote() {
     // first check if quote already exists in database to prevent duplication
-    /**Context thisContext = this;
-    QuoteDBHelper dbHelper = new QuoteDBHelper(thisContext);
-    SQLiteDatabase db = dbHelper.getWritableDatabase();
-    String[] projection = QuoteContract.QuoteEntry.getFullQuoteProjection();
+    String quoteText = quoteList.get(quoteIndex).getQuoteText();
+    String quoteAuthor = quoteList.get(quoteIndex).getQuoteAuthor();
+    Uri uri = QuoteContract.QuoteEntry.CONTENT_URI; // content://.../quote
+    getContentResolver().query(uri, null, QuoteProvider.)
+
+
+
+    ContentValues quoteValues = new ContentValues();
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, quoteList.get(quoteIndex).getQuoteText());
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_AUTHOR, quoteList.get(quoteIndex).getQuoteAuthor());
+    quoteValues.put(QuoteContract.QuoteEntry.COLUMN_DATE, TEST_DATE);
+    /**String[] projection = QuoteContract.QuoteEntry.getFullQuoteProjection();
     String text = quoteList.get(quoteIndex).getQuoteText();
     String author = quoteList.get(quoteIndex).getQuoteAuthor();
     Cursor quoteCursor = thisContext.getContentResolver().query(QuoteContract.QuoteEntry.

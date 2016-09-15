@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -27,17 +28,16 @@ public class SavedQuotes extends AppCompatActivity
     setContentView(R.layout.activity_saved_quotes);
     // add "up" arrow on action bar
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    // retrieve quote list cursor with descending sort order by date
-    String sortOrder = QuoteContract.QuoteEntry.COLUMN_DATE + " DESC";
-    Uri quoteListUri = QuoteContract.QuoteEntry.buildQuoteListUri();
-    Cursor cursor = getContentResolver().query(quoteListUri, null, null, null, sortOrder);
+    // initialise cursor loader. either re-connect with an existing one, or start a new one.
+    getLoaderManager().initLoader(
+            QUOTE_LOADER_ID, null, (android.app.LoaderManager.LoaderCallbacks<Cursor>) this);
     /** // retrieve quotes array list from intent, and use as dummy data to populate saved quotes
     Intent intent = getIntent();
     Bundle extras = intent.getExtras();
     ArrayList<String> quoteTextList = extras.getStringArrayList("quoteTextList");
     ArrayList<String> quoteAuthorList = extras.getStringArrayList("quoteAuthorList");
     ArrayList<HashMap<String, String>> quoteMapList = new ArrayList<>();*/
-    savedQuotesAdapter = new QuoteAdapter(this, cursor, 0);
+    savedQuotesAdapter = new QuoteAdapter(this, null, 0);
     /** // adapter requires a list of maps; each map having key-value pair
     HashMap<String, String> quoteMap = new HashMap<>();
     // save key names in an array for the adapter
@@ -109,19 +109,19 @@ public class SavedQuotes extends AppCompatActivity
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    // initialise cursor loader
-    //getLoaderManager().initLoader(QUOTE_LOADER_ID, null, this);
-
-    return null;
+    // retrieve quote list cursor with descending sort order by date
+    String sortOrder = QuoteContract.QuoteEntry.COLUMN_DATE + " DESC";
+    Uri quoteListUri = QuoteContract.QuoteEntry.buildQuoteListUri();
+    return new CursorLoader(this, quoteListUri, null, null, null, sortOrder);
   }
 
   @Override
-  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+  public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    savedQuotesAdapter.swapCursor(cursor);
   }
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader) {
-
+    savedQuotesAdapter.swapCursor(null);
   }
 }

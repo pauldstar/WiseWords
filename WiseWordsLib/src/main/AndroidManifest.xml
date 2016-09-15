@@ -46,7 +46,7 @@
                 android:value="com.example.android.wisewords.SavedQuotes"/>
         </activity>
         <provider
-            android:authorities="com.example.android.wisewords.ContentProvider"
+            android:authorities="com.example.android.wisewords.content_provider"
             android:name=".data.QuoteProvider"
             android:exported="true"
             android:readPermission="wisewords.READ_DATABASE"

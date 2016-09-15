@@ -19,14 +19,14 @@ import java.util.Date;
  */
 public class QuoteAdapter extends CursorAdapter {
 
-  // Specify the columns we need for the saved quote list item view
+  // this is a PROJECTION which Specifies the columns we need for the saved quote list item view
   private static final String[] QUOTE_COLUMNS = {QuoteContract.QuoteEntry._ID,
           QuoteContract.QuoteEntry.COLUMN_TEXT,
           QuoteContract.QuoteEntry.COLUMN_AUTHOR,
           QuoteContract.QuoteEntry.COLUMN_DATE,
   };
 
-  // Below are indices tied to QUOTE_COLUMNS. If QUOTE_COLUMNS changes, these must change.
+  // Indices tied to the projection QUOTE_COLUMNS. If QUOTE_COLUMNS changes, these must change.
   public static final int COL_QUOTE_ID = 0;
   public static final int COL_QUOTE_TEXT = 1;
   public static final int COL_QUOTE_AUTHOR = 2;

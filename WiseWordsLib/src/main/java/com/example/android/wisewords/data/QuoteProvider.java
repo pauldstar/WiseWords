@@ -19,10 +19,13 @@ public class QuoteProvider extends ContentProvider {
   // URI matcher constants, which are matched with the incoming content URI
   static final int QUOTE = 100;
   static final int QUOTE_WITH_ID = 101;
-  static final int QUOTE_WITH_TEXT_AUTHOR = 102;
-  static final int QUOTE_LIST = 103;
+  static final int QUOTE_LIST = 102;
+  static final int QUOTE_WITH_TEXT_AUTHOR = 103;
   // variable used to build queries from database tables (possibly JOINed)
   private static final SQLiteQueryBuilder quoteQueryBuilder = initialiseQueryBuilder();
+  // selection: text = ? AND author = ?
+  private static final String quoteTextAuthorSelection = QuoteContract.QuoteEntry.COLUMN_TEXT +
+          " = ? AND " + QuoteContract.QuoteEntry.COLUMN_AUTHOR + " = ? ";
 
   @Override
   public boolean onCreate() {
@@ -117,8 +120,18 @@ public class QuoteProvider extends ContentProvider {
   public Cursor query(Uri uri, String[] projection,
                       String selection, String[] selectionArgs, String sortOrder) {
     Cursor retCursor;
-    switch (uriMatcher.match(uri)) {
+    int matchCode = uriMatcher.match(uri);
+    switch (matchCode) {
+      // either case of quotes with ID or text-author should implement the same way
       case QUOTE_WITH_ID: {
+        retCursor = openHelper.getReadableDatabase().query(QuoteContract.QuoteEntry.TABLE_NAME,
+                projection, selection, selectionArgs, null, null, sortOrder);
+        break;
+      }
+      // either case of quotes with ID or text-author should implement the same way
+      case QUOTE_WITH_TEXT_AUTHOR: {
+        selection = quoteTextAuthorSelection;
+        selectionArgs = new String[]
         retCursor = openHelper.getReadableDatabase().query(QuoteContract.QuoteEntry.TABLE_NAME,
                 projection, selection, selectionArgs, null, null, sortOrder);
         break;
@@ -183,18 +196,19 @@ public class QuoteProvider extends ContentProvider {
     // URI.  It's common to use NO_MATCH as the code for this case.
     final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
     final String authority = QuoteContract.CONTENT_AUTHORITY;
-    // For each type of URI you want to add, create a corresponding code.
+    // For each type of URI you want to add, create a corresponding code
+    // begin with the shortest paths first
     matcher.addURI(authority, QuoteContract.PATH_QUOTE, QUOTE);
     matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/#", QUOTE_WITH_ID);
-    matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/*/*", QUOTE_WITH_TEXT_AUTHOR);
     matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/" + QuoteContract.PATH_LIST, QUOTE_LIST);
+    matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/*/*", QUOTE_WITH_TEXT_AUTHOR);
     return matcher;
   }
 
   /**
    * returns a cursor containing a list of quotes
    */
-  private Cursor getQuoteListCursor(String[] projection, String sortOrder) {
+  public Cursor getQuoteListCursor(String[] projection, String sortOrder) {
     // TODO: 08/09/2016  try this style of database retrieval for a single quote on line 72
     return quoteQueryBuilder.query(openHelper.getReadableDatabase(), projection, null, null,
             null, null, sortOrder);

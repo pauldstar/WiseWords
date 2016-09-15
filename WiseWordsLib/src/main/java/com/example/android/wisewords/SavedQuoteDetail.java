@@ -26,4 +26,6 @@ public class SavedQuoteDetail extends AppCompatActivity {
     dateTextTV.setText(dateText);
     quoteAuthorTV.setText(quoteAuthor);
   }
+
+
 }
