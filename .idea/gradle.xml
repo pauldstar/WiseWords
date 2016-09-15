@@ -9,19 +9,19 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/WiseWordsLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/sg_wisewords" />
             <option value="$PROJECT_DIR$/sp_wisewords" />
-            <option value="$PROJECT_DIR$/wisewordslib" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/WiseWordsLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/sg_wisewords" />
             <option value="$PROJECT_DIR$/sp_wisewords" />
-            <option value="$PROJECT_DIR$/wisewordslib" />
           </set>
         </option>
       </GradleProjectSettings>
