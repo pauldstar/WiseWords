@@ -3,6 +3,7 @@
     <string name="main_activity_title">Today</string>
     <string name="quote_text">LOADING</string>
     <string name="quote_author"> </string>
+    <string name="action_share">Share</string>
     <string name="placeholder_quote_text">
         Happiness is essentially a state of going somewhere,
         wholeheartedly, one-direc...
