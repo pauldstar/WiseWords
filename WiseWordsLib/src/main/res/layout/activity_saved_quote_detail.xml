@@ -16,7 +16,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <!--built custom text view-->
         <com.example.android.wisewords.TrenchTextView
@@ -27,14 +28,18 @@
             android:textColor="#ffffff"
             android:layout_weight="1"
             android:textSize="40sp"
-            android:gravity="left"
+            android:gravity="center"
             android:text="@string/placeholder_date_text"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/share_quote_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:maxHeight="43dp"
+            android:src="@drawable/share_icon"/>
 
     </LinearLayout>
 
@@ -68,19 +73,39 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:id="@+id/prev_quote_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:maxHeight="40dp"
+            android:maxWidth="10dp"
+            android:src="@drawable/left_arrow_icon"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/delete_saved_quote"
             android:src="@drawable/delete_icon"
             android:adjustViewBounds="true"
             android:maxWidth="8dp"
+            android:layout_weight="2"
+            android:maxHeight="40dp"/>
+
+        <ImageView
+            android:id="@+id/next_quote_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:maxHeight="50dp"/>
+            android:adjustViewBounds="true"
+            android:maxHeight="40dp"
+            android:maxWidth="10dp"
+            android:src="@drawable/right_arrow_icon"/>
 
     </LinearLayout>
 

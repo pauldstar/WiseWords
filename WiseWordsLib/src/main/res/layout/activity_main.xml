@@ -23,12 +23,22 @@
             android:id="@+id/date_text_today"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center_horizontal"
             android:text="@string/main_activity_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffff"
             android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/share_quote_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:maxHeight="43dp"
+            android:src="@drawable/share_icon"/>
 
         <ImageView
             android:id="@+id/save_quote_icon"
@@ -82,9 +92,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:maxHeight="90dp"
-            android:maxWidth="60dp"
-            android:src="@drawable/storehouse_icon"/>
+            android:maxHeight="50dp"
+            android:maxWidth="40dp"
+            android:src="@drawable/pinned_icon"/>
 
         <ImageView
             android:id="@+id/next_quote_icon"
@@ -92,9 +102,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:maxHeight="70dp"
+            android:maxHeight="40dp"
             android:maxWidth="10dp"
-            android:src="@drawable/right_arrow_icon"/>
+            android:src="@drawable/refresh_icon"/>
 
     </LinearLayout>
 
