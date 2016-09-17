@@ -14,24 +14,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by po482951 on 10/08/2016.
- */
 public class SplashActivity extends AppCompatActivity {
 
-  private static ArrayList<String> quoteTextList = new ArrayList<>();
-  private static ArrayList<String> quoteAuthorList = new ArrayList<>();
+  private static ArrayList<String> quoteTextList, quoteAuthorList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    quoteTextList = new ArrayList<>();
+    quoteAuthorList = new ArrayList<>();
     // retrieve the quote text and authors list using url from MainActivity
     try {
       SplashAsyncTask splashAsyncTask = new SplashAsyncTask();
       splashAsyncTask.execute().get();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    } catch (ExecutionException e) {
+    } catch (InterruptedException | ExecutionException e) {
       e.printStackTrace();
     }
     // add all string ArrayLists to a bundle
@@ -50,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected Void doInBackground(String... params) {
       // below line for debugging; allows breakpoints to be set for the background method
-      android.os.Debug.waitForDebugger();
+      /*android.os.Debug.waitForDebugger();*/
       try {
         Document htmlDocument = Jsoup.connect(MainActivity.htmlUrlString).get();
         Element htmlBodyElement = htmlDocument.body();
@@ -68,11 +64,6 @@ public class SplashActivity extends AppCompatActivity {
         e.printStackTrace();
       }
       return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void result) {
-
     }
   }
 }

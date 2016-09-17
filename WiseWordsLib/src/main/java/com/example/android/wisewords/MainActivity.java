@@ -28,11 +28,9 @@ public class MainActivity extends Activity {
 
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex;
-  // TODO: 16/09/2016 remember that indexHasGoneFullCycle is false
-  private static boolean indexHasGoneFullCycle = false;
-  private static boolean appJustStarted;
+  private static boolean indexHasGoneFullCycle, appJustStarted;
   public static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
-  private static ArrayList<Quote> quoteList = new ArrayList<>();
+  private static ArrayList<Quote> quoteList;
   // nextQuoteList contains the next set of quotes to conceal latency due to loading web-page
   private static ArrayList<Quote> nextQuoteList;
 
@@ -41,6 +39,8 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     appJustStarted = true;
+    indexHasGoneFullCycle = false;
+    quoteList = new ArrayList<>();
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
     android.util.Log.d("Gesture", "Phone module");
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
    */
   public void getNextQuote() {
     // set the index to point to the next item on the list
-    quoteIndex = getNextIndex();
+    quoteIndex = appJustStarted ? 0 : (quoteIndex + 1) % quoteList.size();
     // update the quoteList if necessary
     if (quoteIndex == 0) {
       if (indexHasGoneFullCycle) {
@@ -101,19 +101,12 @@ public class MainActivity extends Activity {
       // update nextQuoteList in the background
       QuoteAsyncTask quoteAsyncTask = new QuoteAsyncTask();
       quoteAsyncTask.execute(htmlUrlString);
-      indexHasGoneFullCycle = false;
     } // when it comes back to zero, then we reload some more quotes
     else if (quoteIndex == 19) indexHasGoneFullCycle = true;
     // bind quote text and author to respective text views
     quoteTextTView.setText(quoteList.get(quoteIndex).getQuoteText());
     quoteAuthorTView.setText(quoteList.get(quoteIndex).getQuoteAuthor());
     Log.d("NextQuote", "QuotesSize: " + quoteList.size() + " QuoteIndex: " + quoteIndex);
-  }
-
-  private int getNextIndex() {
-    if (appJustStarted) quoteIndex = 0;
-    else quoteIndex = (quoteIndex + 1) % quoteList.size();
-    return quoteIndex;
   }
 
   /**
@@ -175,6 +168,7 @@ public class MainActivity extends Activity {
       // only access the internet when we've exhausted the current quoteList
       if (appJustStarted || indexHasGoneFullCycle) {
         appJustStarted = false;
+        indexHasGoneFullCycle = false;
         nextQuoteList = new ArrayList<>();
         try {
           Document htmlDocument = Jsoup.connect(htmlUrlString).get();
@@ -196,10 +190,6 @@ public class MainActivity extends Activity {
         }
       }
       return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void result) {
     }
   }
 }
