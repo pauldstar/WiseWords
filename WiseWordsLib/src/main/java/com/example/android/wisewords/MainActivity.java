@@ -72,7 +72,8 @@ public class MainActivity extends Activity {
     ImageView savedQuotesImageView = (ImageView) findViewById(R.id.saved_quotes_icon);
     savedQuotesImageView.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        showSavedQuotes();
+        Intent intent = new Intent(this, SavedQuotes.class);
+				startActivity(intent);
       }
     });
     // set listener on save_quote_icon so a click save quote in database
@@ -100,36 +101,13 @@ public class MainActivity extends Activity {
       // only access the internet if we've exhausted the current quoteList
       // update nextQuoteList in the background
       QuoteAsyncTask quoteAsyncTask = new QuoteAsyncTask();
-      quoteAsyncTask.execute(htmlUrlString);
+      quoteAsyncTask.execute();
     } // when it comes back to zero, then we reload some more quotes
     else if (quoteIndex == 19) indexHasGoneFullCycle = true;
     // bind quote text and author to respective text views
     quoteTextTView.setText(quoteList.get(quoteIndex).getQuoteText());
     quoteAuthorTView.setText(quoteList.get(quoteIndex).getQuoteAuthor());
     Log.d("NextQuote", "QuotesSize: " + quoteList.size() + " QuoteIndex: " + quoteIndex);
-  }
-
-  /**
-   * executed when the pinned_icon is clicked
-   */
-  public void showSavedQuotes() {
-    // collect all the quote texts from the quote list for the dummy data
-    ArrayList<String> quoteTextList = new ArrayList<>();
-    ArrayList<String> quoteAuthorList = new ArrayList<>();
-    String quoteText, quoteAuthor;
-    for (Quote quote : quoteList) {
-      quoteText = quote.getQuoteText();
-      quoteAuthor = quote.getQuoteAuthor();
-      quoteTextList.add(quoteText);
-      quoteAuthorList.add(quoteAuthor);
-    }
-    // call intent and add bundle containing the quoteText and quoteAuthor lists
-    Intent intent = new Intent(this, SavedQuotes.class);
-    Bundle extras = new Bundle();
-    extras.putStringArrayList("quoteTextList", quoteTextList);
-    extras.putStringArrayList("quoteAuthorList", quoteAuthorList);
-    intent.putExtras(extras);
-    startActivity(intent);
   }
 
   /**
@@ -146,8 +124,7 @@ public class MainActivity extends Activity {
       Toast toast = Toast.makeText(this, "Quote already saved!", Toast.LENGTH_SHORT);
       toast.show();
       return;
-    }
-    // quote doesn't already exist, so save quote.
+    } // quote doesn't already exist, so save quote.
     ContentValues quoteValues = new ContentValues();
     quoteValues.put(QuoteContract.QuoteEntry.COLUMN_TEXT, quoteText);
     quoteValues.put(QuoteContract.QuoteEntry.COLUMN_AUTHOR, quoteAuthor);
