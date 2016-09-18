@@ -1,12 +1,11 @@
 package com.example.android.wisewords;
 
-/**
- * Created by po482951 on 12/08/2016.
- */
-public class Quote {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Quote implements Parcelable {
 
   private String quoteText, author;
-  private static final String LOG_TAG = Quote.class.getSimpleName();
 
   public Quote(String nQuoteText, String nAuthor) {
     quoteText = nQuoteText;
@@ -17,16 +16,35 @@ public class Quote {
     return author;
   }
 
-  public void setAuthor(String author) {
-    this.author = author;
-  }
-
   public String getQuoteText() {
     return quoteText;
   }
 
-  public void setQuoteText(String quote) {
-    this.quoteText = quote;
+  protected Quote(Parcel in) {
+    quoteText = in.readString();
+    author = in.readString();
   }
 
+  public static final Creator<Quote> CREATOR = new Creator<Quote>() {
+    @Override
+    public Quote createFromParcel(Parcel in) {
+      return new Quote(in);
+    }
+
+    @Override
+    public Quote[] newArray(int size) {
+      return new Quote[size];
+    }
+  };
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(quoteText);
+    parcel.writeString(author);
+  }
 }

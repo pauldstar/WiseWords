@@ -2,10 +2,10 @@ package com.example.android.wisewords;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,12 +15,6 @@ import android.widget.Toast;
 
 import com.example.android.wisewords.data.QuoteContract;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -28,38 +22,30 @@ public class MainActivity extends Activity {
 
   private static TextView quoteTextTView, quoteAuthorTView;
   private static int quoteIndex;
-  private static boolean indexHasGoneFullCycle, appJustStarted;
+  public static boolean indexHasGoneFullCycle, appJustStarted;
   public static final String htmlUrlString = "http://www.quotationspage.com/random.php3";
   private static ArrayList<Quote> quoteList;
   // nextQuoteList contains the next set of quotes to conceal latency due to loading web-page
-  private static ArrayList<Quote> nextQuoteList;
+  public static ArrayList<Quote> nextQuoteList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    appJustStarted = true;
-    indexHasGoneFullCycle = false;
-    quoteList = new ArrayList<>();
+    // check if page just restarted after a screen orientation change
+    if (savedInstanceState != null) {
+      quoteIndex = savedInstanceState.getInt("quoteIndex");
+      nextQuoteList = savedInstanceState.getParcelableArrayList("nextQuoteList");
+      appJustStarted = false;
+    } else appJustStarted = true;
     quoteTextTView = (TextView) findViewById(R.id.quote_text);
     quoteAuthorTView = (TextView) findViewById(R.id.quote_author);
-    android.util.Log.d("Gesture", "Phone module");
-    // set the first quote to appear on screen
-    // first retrieve list of quoteText and quoteAuthors from SplashActivity Bundle
+    // set the quote to appear on screen
+    // first retrieve quoteList from SplashActivity Bundle
     Intent intent = getIntent();
-    Bundle bundle = intent.getExtras();
-    ArrayList<String> quoteTextList = bundle.getStringArrayList("quoteTextList");
-    ArrayList<String> quoteAuthorList = bundle.getStringArrayList("quoteAuthorList");
-    // iterate through the quote texts and authors
-    Quote quote;
-    String quoteText, quoteAuthor;
-    int listSize = quoteTextList.size();
-    for (int index = 0; index < listSize; index++) {
-      quoteText = quoteTextList.get(index);
-      quoteAuthor = quoteAuthorList.get(index);
-      quote = new Quote(quoteText, quoteAuthor);
-      quoteList.add(quote);
-    }
+    Bundle intentBundle = intent.getExtras();
+    quoteList = intentBundle.getParcelableArrayList("quoteList");
+    indexHasGoneFullCycle = false;
     getNextQuote();
     // set listener on next_icon so a click will change to next quote on list
     ImageView nextIconImageView = (ImageView) findViewById(R.id.next_quote_icon);
@@ -70,10 +56,11 @@ public class MainActivity extends Activity {
     });
     // set listener on saved_quotes_icon so a click will change to list of saved quotes
     ImageView savedQuotesImageView = (ImageView) findViewById(R.id.saved_quotes_icon);
+    final Context context = this;
     savedQuotesImageView.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        Intent intent = new Intent(this, SavedQuotes.class);
-				startActivity(intent);
+        Intent intent = new Intent(context, SavedQuotes.class);
+        startActivity(intent);
       }
     });
     // set listener on save_quote_icon so a click save quote in database
@@ -83,6 +70,16 @@ public class MainActivity extends Activity {
         saveQuote();
       }
     });
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle instanceStateToSave) {
+    super.onSaveInstanceState(instanceStateToSave);
+    // save the previous quoteIndex because it gets incremented when getNextQuote is called
+    // decrement using modulo
+    int previousIndex = (quoteIndex - 1 + quoteList.size()) % quoteList.size();
+    instanceStateToSave.putInt("quoteIndex", previousIndex);
+    instanceStateToSave.putParcelableArrayList("nextQuoteList", nextQuoteList);
   }
 
   /**
@@ -101,7 +98,7 @@ public class MainActivity extends Activity {
       // only access the internet if we've exhausted the current quoteList
       // update nextQuoteList in the background
       QuoteAsyncTask quoteAsyncTask = new QuoteAsyncTask();
-      quoteAsyncTask.execute();
+      quoteAsyncTask.execute(1);
     } // when it comes back to zero, then we reload some more quotes
     else if (quoteIndex == 19) indexHasGoneFullCycle = true;
     // bind quote text and author to respective text views
@@ -134,39 +131,5 @@ public class MainActivity extends Activity {
     getContentResolver().insert(QuoteContract.QuoteEntry.CONTENT_URI, quoteValues);
     Toast toast = Toast.makeText(this, "Quote saved!", Toast.LENGTH_SHORT);
     toast.show();
-  }
-
-  private class QuoteAsyncTask extends AsyncTask<String, Void, Void> {
-
-    @Override
-    protected Void doInBackground(String... params) {
-      // below line for debugging; allows breakpoints to be set for the background method
-      /*android.os.Debug.waitForDebugger();*/
-      // only access the internet when we've exhausted the current quoteList
-      if (appJustStarted || indexHasGoneFullCycle) {
-        appJustStarted = false;
-        indexHasGoneFullCycle = false;
-        nextQuoteList = new ArrayList<>();
-        try {
-          Document htmlDocument = Jsoup.connect(htmlUrlString).get();
-          Element htmlBodyElement = htmlDocument.body();
-          Elements quoteTextElements = htmlBodyElement.select("dt.quote > a");
-          Elements quoteAuthorElements = htmlBodyElement.select("dd.author > b");
-          // iterate through the quotes and authors
-          String quoteText, quoteAuthor;
-          Quote quote;
-          int listSize = quoteTextElements.size();
-          for (int index = 0; index < listSize; index++) {
-            quoteText = quoteTextElements.get(index).ownText();
-            quoteAuthor = quoteAuthorElements.get(index).text();
-            quote = new Quote(quoteText, quoteAuthor);
-            nextQuoteList.add(quote);
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-      return null;
-    }
   }
 }
