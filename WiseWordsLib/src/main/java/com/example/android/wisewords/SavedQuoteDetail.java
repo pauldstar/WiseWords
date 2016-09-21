@@ -20,7 +20,6 @@ public class SavedQuoteDetail extends AppCompatActivity
 
   private Cursor savedQuotesCursor;
   private static final int QUOTE_LIST_LOADER_ID = 0;
-  /**private static final int DELETE_QUOTE_LOADER_ID = 1;*/
   private static int position, maxCursorIndex;
   private static String quoteId, quoteText, quoteAuthor;
   private static long saveDate;
@@ -103,7 +102,6 @@ public class SavedQuoteDetail extends AppCompatActivity
   }
 
   private void deleteQuote() {
-    /**getLoaderManager().initLoader(DELETE_QUOTE_LOADER_ID, null, this);*/
     // destroy cursor loader; for some reason every call to database uses loader unless destroyed
     getLoaderManager().destroyLoader(QUOTE_LIST_LOADER_ID);
     String[] selectionArgs = new String[]{quoteId};

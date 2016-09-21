@@ -47,21 +47,6 @@ public class SavedQuotes extends AppCompatActivity
   }
 
   private void launchSavedQuoteDetail(int position) {
-    /** // get the needed text views associated with that list item
-    TextView quoteIdTV = (TextView) view.findViewById(R.id.hidden_saved_quote_id);
-    TextView fullQuoteTextTV = (TextView) view.findViewById(R.id.hidden_full_saved_quote_text);
-    TextView dateTextTV = (TextView) view.findViewById(R.id.saved_quote_date);
-    TextView quoteAuthorTV = (TextView) view.findViewById(R.id.hidden_saved_quote_author);
-    // get the strings from the text views
-    String quoteId = quoteIdTV.getText().toString();
-    String fullQuoteText = fullQuoteTextTV.getText().toString();
-    String dateText = dateTextTV.getText().toString();
-    String quoteAuthor = quoteAuthorTV.getText().toString(); */
-    // add all strings to a bundle
-    /** quoteBundle.putString("quoteId", quoteId);
-    quoteBundle.putString("fullQuoteText", fullQuoteText);
-    quoteBundle.putString("dateText", dateText);
-    quoteBundle.putString("quoteAuthor", quoteAuthor);*/
     // call intent and add bundle as extras
     Intent intent = new Intent(this, SavedQuoteDetail.class).putExtra("position", position);
     startActivity(intent);

@@ -82,12 +82,6 @@ public class QuoteContract {
       return CONTENT_URI.buildUpon().appendPath(PATH_LIST).build();
     }
 
-    /** function to build URI to delete a quote:
-     * content/authority/quote/delete */
-    public static Uri buildDeleteQuoteUri() {
-      return CONTENT_URI.buildUpon().appendPath(PATH_DELETE).build();
-    }
-
     /** return full quote projection */
     public static String[] getFullQuoteProjection() {
       // projection = "id, text, author, date"

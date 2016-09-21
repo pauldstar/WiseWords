@@ -20,7 +20,6 @@ public class QuoteProvider extends ContentProvider {
   static final int QUOTE_WITH_ID = 101;
   static final int QUOTE_LIST = 102;
   static final int QUOTE_WITH_TEXT_AUTHOR = 103;
-  /**static final int QUOTE_DELETE = 104;*/
   // variable used to build queries from database tables (possibly JOINed)
   private static final SQLiteQueryBuilder quoteQueryBuilder = initialiseQueryBuilder();
   // selection: _ID = ?
@@ -190,8 +189,6 @@ public class QuoteProvider extends ContentProvider {
     matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/#", QUOTE_WITH_ID);
     matcher.addURI(authority,
             QuoteContract.PATH_QUOTE + "/" + QuoteContract.PATH_LIST, QUOTE_LIST);
-    /**matcher.addURI(authority,
-            QuoteContract.PATH_QUOTE + "/" + QuoteContract.PATH_DELETE, QUOTE_DELETE);*/
     matcher.addURI(authority, QuoteContract.PATH_QUOTE + "/*/*", QUOTE_WITH_TEXT_AUTHOR);
     return matcher;
   }

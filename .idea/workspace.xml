@@ -24,7 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="90ee5850-76e1-4f79-bceb-bc795d937d10" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" afterPath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuotes.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuotes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java" />
     </list>
     <list id="187f0edf-71db-4f16-95c0-cc368b6ca60d" name="Failed commit: Default" comment="Merge branch 'master' of https://github.com/pauldstar/WiseWords&#10;&#10;# Conflicts:&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;" />
     <ignored path="WiseWords.iws" />
@@ -53,11 +56,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="SavedQuotes.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SavedQuotes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SavedQuotes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -75,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuoteProvider.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QuoteProvider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.29227054">
+              <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -107,8 +110,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="pauldstar &lt;paulogbeiwi@gmail.com&gt;" />
         <option value="Paul Ogbeiwi" />
+        <option value="pauldstar &lt;paulogbeiwi@gmail.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -4405,7 +4408,13 @@
       <option name="project" value="LOCAL" />
       <updated>1474098235956</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="code cleanup">
+      <created>1474464459693</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1474464459693</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4419,7 +4428,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3275563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7723577" sideWeight="0.49314025" order="8" side_tool="false" content_ui="tabs" />
@@ -4428,7 +4437,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.700565" sideWeight="0.5075027" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70615566" sideWeight="0.48939395" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7688734" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7688734" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48775893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -4501,7 +4510,8 @@
     <MESSAGE value="sg_wisewords main activity not working on Toshiba laptop; pushed some files that I attempts to make it work but doesn't. Time to try the HP laptop&#10;" />
     <MESSAGE value="&quot;cleaned up the code comments a little bit&quot;" />
     <MESSAGE value="fixed bug in MainActivity; caused the same quoteList to be reused because nextQuoteList wasn't updating" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bug in MainActivity; caused the same quoteList to be reused because nextQuoteList wasn't updating" />
+    <MESSAGE value="code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="code cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4871,14 +4881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteContract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4890,7 +4892,15 @@
     <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SavedQuotes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29227054">
+          <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
           <folding />
         </state>
       </provider>
