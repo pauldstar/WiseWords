@@ -23,35 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90ee5850-76e1-4f79-bceb-bc795d937d10" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wisewordslib/src/main/res/drawable/down_arrow_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wisewordslib/src/main/res/drawable/up_arrow_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/Utility.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/AcousticTextView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/res/drawable/left_arrow_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/res/drawable/right_arrow_icon.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/jsoup_1_9_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jsoup_1_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_24_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_24_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/MainActivity.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/QuoteAsyncTask.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/QuoteAsyncTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuotes.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/SavedQuotes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteContract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/java/com/example/android/wisewords/data/QuoteProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WiseWordsLib/src/main/res/layout/activity_saved_quote_detail.xml" afterPath="$PROJECT_DIR$/WiseWordsLib/src/main/res/layout/activity_saved_quote_detail.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sg_wisewords/sg_wisewords.iml" afterPath="$PROJECT_DIR$/sg_wisewords/sg_wisewords.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sg_wisewords/src/main/java/com/example/android/sg_wisewords/MainActivitySG.java" afterPath="$PROJECT_DIR$/sg_wisewords/src/main/java/com/example/android/sg_wisewords/MainActivitySG.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sp_wisewords/sp_wisewords.iml" afterPath="$PROJECT_DIR$/sp_wisewords/sp_wisewords.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/QuoteAdapter.java" afterPath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/QuoteAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SplashActivity.java" afterPath="$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SplashActivity.java" />
     </list>
     <list id="187f0edf-71db-4f16-95c0-cc368b6ca60d" name="Failed commit: Default" comment="Merge branch 'master' of https://github.com/pauldstar/WiseWords&#10;&#10;# Conflicts:&#10;#&#9;gradle/wrapper/gradle-wrapper.properties&#10;" />
     <ignored path="WiseWords.iws" />
@@ -93,8 +68,8 @@
       <file leaf-file-name="SavedQuoteDetail.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.3590908">
-              <caret line="112" column="3" selection-start-line="112" selection-start-column="3" selection-end-line="112" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.62801933">
+              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding>
                 <element signature="method#onLoaderReset#0;class#SavedQuoteDetail#0" expanded="false" />
               </folding>
@@ -3784,6 +3759,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3940,6 +3918,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -4028,11 +4008,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches">
-        <subPane />
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4445,7 +4420,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3275563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4454,8 +4429,8 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.700565" sideWeight="0.5075027" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.70615566" sideWeight="0.48939395" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7694974" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70615566" sideWeight="0.48939395" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7688734" sideWeight="0.4969697" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48775893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -4976,8 +4951,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wisewordslib/src/main/java/com/example/android/wisewords/SavedQuoteDetail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3590908">
-          <caret line="112" column="3" selection-start-line="112" selection-start-column="3" selection-end-line="112" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.62801933">
+          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding>
             <element signature="method#onLoaderReset#0;class#SavedQuoteDetail#0" expanded="false" />
           </folding>
