@@ -72,6 +72,9 @@ public class MainActivity extends Activity {
     });
   }
 
+  /**
+   * Called whenever the screen orientation changes
+   */
   @Override
   protected void onSaveInstanceState(Bundle instanceStateToSave) {
     super.onSaveInstanceState(instanceStateToSave);
@@ -83,7 +86,7 @@ public class MainActivity extends Activity {
   }
 
   /**
-   * executed when the refresh_icon is clicked
+   * Executed when the refresh_icon is clicked
    */
   public void getNextQuote() {
     // set the index to point to the next item on the list
@@ -108,7 +111,7 @@ public class MainActivity extends Activity {
   }
 
   /**
-   * save a quote from main activity
+   * Save a quote from main activity
    */
   public void saveQuote() {
     String quoteText = quoteList.get(quoteIndex).getQuoteText();

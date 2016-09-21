@@ -97,13 +97,13 @@ public class MainActivitySG extends Activity {
     if (gestureSensor != null) gestureSensor.unregister();
   }
 
-  // executed when the right_arrow_icon is clicked
+  // executed when the down_arrow_icon is clicked
   private void getNextQuote() {
     QuoteAsyncTask asyncTask = new QuoteAsyncTask();
     asyncTask.execute(htmlUrlString);
   }
 
-  // executed when the right_arrow_icon is clicked
+  // executed when the down_arrow_icon is clicked
   private void showSavedQuotes() {
     // collect all the quote texts from the quote list for the dummy data
     ArrayList<String> quoteTextList = new ArrayList<>();

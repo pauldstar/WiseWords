@@ -25,8 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     Bundle quoteBundle = new Bundle();
     quoteBundle.putParcelableArrayList("quoteList", quoteList);
     // we launch the main activity; while the activity loads the splash screen would be visible.
-    Intent intent = new Intent(this, MainActivity.class).
-            putExtras(quoteBundle);
+    Intent intent = new Intent(this, MainActivity.class).putExtras(quoteBundle);
     startActivity(intent);
     finish();
   }

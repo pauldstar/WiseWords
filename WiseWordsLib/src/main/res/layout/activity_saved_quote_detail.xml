@@ -78,14 +78,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/prev_quote_icon"
+            android:id="@+id/later_quote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:maxHeight="40dp"
+            android:maxHeight="30dp"
             android:maxWidth="10dp"
-            android:src="@drawable/left_arrow_icon"/>
+            android:src="@drawable/up_arrow_icon"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -98,14 +98,14 @@
             android:maxHeight="40dp"/>
 
         <ImageView
-            android:id="@+id/next_quote_icon"
+            android:id="@+id/earlier_quote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:maxHeight="40dp"
+            android:maxHeight="30dp"
             android:maxWidth="10dp"
-            android:src="@drawable/right_arrow_icon"/>
+            android:src="@drawable/down_arrow_icon"/>
 
     </LinearLayout>
 

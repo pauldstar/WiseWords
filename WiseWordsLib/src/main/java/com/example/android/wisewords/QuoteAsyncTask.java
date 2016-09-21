@@ -33,6 +33,8 @@ public class QuoteAsyncTask extends AsyncTask<Integer, Void, Void> {
           MainActivity.nextQuoteList = getQuoteList();
         }
         break;
+      default:
+        throw new IllegalArgumentException();
     }
     return null;
   }

@@ -28,6 +28,7 @@ public class QuoteContract {
   // as the ContentProvider hasn't been given any information on what to do with "givemeroot".
   public static final String PATH_QUOTE = "quote";
   public static final String PATH_LIST = "list";
+  public static final String PATH_DELETE = "delete";
   /**
    * To make it easy to query for the exact date, we normalize all dates that go into
    * the database to the start of the the Julian day at UTC.
@@ -81,13 +82,17 @@ public class QuoteContract {
       return CONTENT_URI.buildUpon().appendPath(PATH_LIST).build();
     }
 
+    /** function to build URI to delete a quote:
+     * content/authority/quote/delete */
+    public static Uri buildDeleteQuoteUri() {
+      return CONTENT_URI.buildUpon().appendPath(PATH_DELETE).build();
+    }
+
     /** return full quote projection */
     public static String[] getFullQuoteProjection() {
       // projection = "id, text, author, date"
-      String[] projection = new String[] {QuoteContract.QuoteEntry._ID,
-              QuoteContract.QuoteEntry.COLUMN_TEXT, QuoteContract.QuoteEntry.COLUMN_AUTHOR,
-              QuoteContract.QuoteEntry.COLUMN_DATE};
-      return projection;
+      return new String[] {QuoteContract.QuoteEntry._ID, QuoteContract.QuoteEntry.COLUMN_TEXT,
+              QuoteContract.QuoteEntry.COLUMN_AUTHOR, QuoteContract.QuoteEntry.COLUMN_DATE};
     }
   }
 }

@@ -7,12 +7,12 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.android.wisewords.data.QuoteContract;
 
@@ -21,15 +21,18 @@ public class SavedQuotes extends AppCompatActivity
 
   private static final int QUOTE_LOADER_ID = 0;
   private QuoteAdapter savedQuotesAdapter;
+  private ActionBar actionBar;
+  private Cursor savedQuotesCursor;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_saved_quotes);
-    // add "up" arrow on action bar
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     // initialise cursor loader. either re-connect with an existing one, or start a new one.
     getLoaderManager().initLoader(QUOTE_LOADER_ID, null, this);
+    // add "up" arrow to action bar
+    actionBar = getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
     // create adapter and bind the adaptor to the saved quotes list view to display
     savedQuotesAdapter = new QuoteAdapter(this, null, 0);
     ListView listView = (ListView) findViewById(R.id.listview_saved_quotes);
@@ -38,13 +41,13 @@ public class SavedQuotes extends AppCompatActivity
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        launchSavedQuoteDetail(view);
+        launchSavedQuoteDetail(position);
       }
     });
   }
 
-  private void launchSavedQuoteDetail(View view) {
-    // get the needed text views associated with that list item
+  private void launchSavedQuoteDetail(int position) {
+    /** // get the needed text views associated with that list item
     TextView quoteIdTV = (TextView) view.findViewById(R.id.hidden_saved_quote_id);
     TextView fullQuoteTextTV = (TextView) view.findViewById(R.id.hidden_full_saved_quote_text);
     TextView dateTextTV = (TextView) view.findViewById(R.id.saved_quote_date);
@@ -53,16 +56,14 @@ public class SavedQuotes extends AppCompatActivity
     String quoteId = quoteIdTV.getText().toString();
     String fullQuoteText = fullQuoteTextTV.getText().toString();
     String dateText = dateTextTV.getText().toString();
-    String quoteAuthor = quoteAuthorTV.getText().toString();
+    String quoteAuthor = quoteAuthorTV.getText().toString(); */
     // add all strings to a bundle
-    Bundle quoteItems = new Bundle();
-    quoteItems.putString("quoteId", quoteId);
-    quoteItems.putString("fullQuoteText", fullQuoteText);
-    quoteItems.putString("dateText", dateText);
-    quoteItems.putString("quoteAuthor", quoteAuthor);
+    /** quoteBundle.putString("quoteId", quoteId);
+    quoteBundle.putString("fullQuoteText", fullQuoteText);
+    quoteBundle.putString("dateText", dateText);
+    quoteBundle.putString("quoteAuthor", quoteAuthor);*/
     // call intent and add bundle as extras
-    Intent intent = new Intent(SavedQuotes.this, SavedQuoteDetail.class)
-            .putExtras(quoteItems);
+    Intent intent = new Intent(this, SavedQuoteDetail.class).putExtra("position", position);
     startActivity(intent);
   }
 
@@ -89,7 +90,12 @@ public class SavedQuotes extends AppCompatActivity
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    savedQuotesAdapter.swapCursor(cursor);
+    savedQuotesCursor = cursor;
+    savedQuotesAdapter.swapCursor(savedQuotesCursor);
+    int quoteCount = savedQuotesAdapter.getCount();
+    String activityTitle = getResources().getString(R.string.title_activity_saved_quotes)
+            + " (" + quoteCount + ")";
+    actionBar.setTitle(activityTitle);
   }
 
   @Override

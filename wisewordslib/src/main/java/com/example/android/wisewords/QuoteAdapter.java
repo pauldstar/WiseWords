@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.example.android.wisewords.data.QuoteContract;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 /**
  * Created by po482951 on 13/09/2016.
  * Class collects saved quote data from cursor and binds to list view item
@@ -20,11 +17,7 @@ import java.util.Date;
 public class QuoteAdapter extends CursorAdapter {
 
   // this is a PROJECTION which Specifies the columns we need for the saved quote list item view
-  private static final String[] QUOTE_COLUMNS = {QuoteContract.QuoteEntry._ID,
-          QuoteContract.QuoteEntry.COLUMN_TEXT,
-          QuoteContract.QuoteEntry.COLUMN_AUTHOR,
-          QuoteContract.QuoteEntry.COLUMN_DATE,
-  };
+  private static final String[] QUOTE_COLUMNS = QuoteContract.QuoteEntry.getFullQuoteProjection();
 
   // Indices tied to the projection QUOTE_COLUMNS. If QUOTE_COLUMNS changes, these must change.
   public static final int COL_QUOTE_ID = 0;
@@ -55,25 +48,13 @@ public class QuoteAdapter extends CursorAdapter {
     viewHolder.idView.setText(String.valueOf(_ID));
     // bind full and trimmed quote texts
     String quoteText = cursor.getString(COL_QUOTE_TEXT);
-    viewHolder.trimmedQuoteTextView.setText(trimQuoteText(quoteText));
+    viewHolder.trimmedQuoteTextView.setText(Utility.trimText(quoteText, 81));
     viewHolder.hiddenFullQuoteTextView.setText(quoteText);
     // bind author
     viewHolder.hiddenAuthorView.setText(cursor.getString(COL_QUOTE_AUTHOR));
     // bind date
     long date = cursor.getLong(COL_QUOTE_DATE);
-    viewHolder.dateView.setText(formatDate(date));
-  }
-
-  private String formatDate(long dateInMilliseconds) {
-    Date date = new Date(dateInMilliseconds);
-    return DateFormat.getDateInstance().format(date);
-  }
-
-  private String trimQuoteText(String text) {
-    // trim the quote text to fit the text view
-    if (text.length() > 81) //  reduce length of string to fit text view
-      text = text.substring(0, 77) + "...";
-    return text;
+    viewHolder.dateView.setText(Utility.formatDate(date));
   }
 
   /**
