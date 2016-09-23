@@ -22,7 +22,6 @@ public class SavedQuotes extends AppCompatActivity
   private static final int QUOTE_LOADER_ID = 0;
   private QuoteAdapter savedQuotesAdapter;
   private ActionBar actionBar;
-  private Cursor savedQuotesCursor;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +74,7 @@ public class SavedQuotes extends AppCompatActivity
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    savedQuotesCursor = cursor;
-    savedQuotesAdapter.swapCursor(savedQuotesCursor);
+    savedQuotesAdapter.swapCursor(cursor);
     int quoteCount = savedQuotesAdapter.getCount();
     String activityTitle = getResources().getString(R.string.title_activity_saved_quotes)
             + " (" + quoteCount + ")";

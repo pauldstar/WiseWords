@@ -9,9 +9,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-/**
- * Created by po482951 on 18/08/2016.
- */
 public class QuoteContract {
 
   // The "Content authority" is a name for the entire content provider, similar to the

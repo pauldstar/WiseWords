@@ -20,9 +20,9 @@ public class QuoteAdapter extends CursorAdapter {
   private static final String[] QUOTE_COLUMNS = QuoteContract.QuoteEntry.getFullQuoteProjection();
 
   // Indices tied to the projection QUOTE_COLUMNS. If QUOTE_COLUMNS changes, these must change.
-  public static final int COL_QUOTE_ID = 0;
+  /**public static final int COL_QUOTE_ID = 0;*/
   public static final int COL_QUOTE_TEXT = 1;
-  public static final int COL_QUOTE_AUTHOR = 2;
+  /**public static final int COL_QUOTE_AUTHOR = 2;*/
   public static final int COL_QUOTE_DATE = 3;
 
   public QuoteAdapter(Context context, Cursor c, int flags) {
@@ -44,14 +44,14 @@ public class QuoteAdapter extends CursorAdapter {
     // the View passed into this function is the View returned from newView method.
     ViewHolder viewHolder = (ViewHolder) view.getTag();
     // bind ID
-    long _ID = cursor.getLong(COL_QUOTE_ID);
-    viewHolder.idView.setText(String.valueOf(_ID));
+    /**long _ID = cursor.getLong(COL_QUOTE_ID);
+    viewHolder.idView.setText(String.valueOf(_ID));*/
     // bind full and trimmed quote texts
     String quoteText = cursor.getString(COL_QUOTE_TEXT);
     viewHolder.trimmedQuoteTextView.setText(Utility.trimText(quoteText, 81));
-    viewHolder.hiddenFullQuoteTextView.setText(quoteText);
+    /**viewHolder.hiddenFullQuoteTextView.setText(quoteText);
     // bind author
-    viewHolder.hiddenAuthorView.setText(cursor.getString(COL_QUOTE_AUTHOR));
+    viewHolder.hiddenAuthorView.setText(cursor.getString(COL_QUOTE_AUTHOR));*/
     // bind date
     long date = cursor.getLong(COL_QUOTE_DATE);
     viewHolder.dateView.setText(Utility.formatDate(date));
@@ -62,18 +62,18 @@ public class QuoteAdapter extends CursorAdapter {
    */
   public static class ViewHolder {
 
-    public final TextView idView;
+    /**public final TextView idView;*/
     public final TextView trimmedQuoteTextView;
     public final TextView dateView;
-    public final TextView hiddenFullQuoteTextView;
-    public final TextView hiddenAuthorView;
+    /**public final TextView hiddenFullQuoteTextView;
+    public final TextView hiddenAuthorView;*/
 
     public ViewHolder(View view) {
-      idView = (TextView) view.findViewById(R.id.hidden_saved_quote_id);
+      /**idView = (TextView) view.findViewById(R.id.hidden_saved_quote_id);*/
       trimmedQuoteTextView = (TextView) view.findViewById(R.id.trimmed_saved_quote_text);
       dateView = (TextView) view.findViewById(R.id.saved_quote_date);
-      hiddenFullQuoteTextView = (TextView) view.findViewById(R.id.hidden_full_saved_quote_text);
-      hiddenAuthorView = (TextView) view.findViewById(R.id.hidden_saved_quote_author);
+      /**hiddenFullQuoteTextView = (TextView) view.findViewById(R.id.hidden_full_saved_quote_text);
+      hiddenAuthorView = (TextView) view.findViewById(R.id.hidden_saved_quote_author);*/
     }
   }
 }

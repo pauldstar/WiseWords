@@ -70,6 +70,13 @@ public class MainActivity extends Activity {
         saveQuote();
       }
     });
+    // set listener on share_quote_icon so a click shares quote
+    ImageView shareQuoteImageView = (ImageView) findViewById(R.id.share_quote_icon);
+    shareQuoteImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        shareQuote();
+      }
+    });
   }
 
   /**
@@ -134,5 +141,19 @@ public class MainActivity extends Activity {
     getContentResolver().insert(QuoteContract.QuoteEntry.CONTENT_URI, quoteValues);
     Toast toast = Toast.makeText(this, "Quote saved!", Toast.LENGTH_SHORT);
     toast.show();
+  }
+
+  private void shareQuote() {
+    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+    // this flag returns us to this application
+    // when we close the application that handles this share intent
+    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+    shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+    shareIntent.setType("text/plain");
+    String quoteText = quoteList.get(quoteIndex).getQuoteText();
+    String quoteAuthor = quoteList.get(quoteIndex).getQuoteAuthor();
+    String sharedText = quoteText + "\n[" + quoteAuthor + "]\n#PaulsWiseWords";
+    shareIntent.putExtra(Intent.EXTRA_TEXT, sharedText);
+    startActivity(Intent.createChooser(shareIntent, "Share Quote!"));
   }
 }

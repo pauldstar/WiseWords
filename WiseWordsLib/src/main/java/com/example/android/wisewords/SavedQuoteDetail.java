@@ -65,6 +65,13 @@ public class SavedQuoteDetail extends AppCompatActivity
         displayLaterQuote();
       }
     });
+    // set listener on share_quote_icon so a click shares quote
+    ImageView shareQuoteImageView = (ImageView) findViewById(R.id.share_quote_icon);
+    shareQuoteImageView.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        shareQuote();
+      }
+    });
   }
 
   private void displayLaterQuote() {
@@ -108,6 +115,18 @@ public class SavedQuoteDetail extends AppCompatActivity
     // this command won't work unless loader destroyed
     getContentResolver().delete(QuoteContract.QuoteEntry.CONTENT_URI, null, selectionArgs);
     finish();
+  }
+
+  private void shareQuote() {
+    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+    // this flag returns us to this application
+    // when we close the application that handles this share intent
+    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+    shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+    shareIntent.setType("text/plain");
+    String sharedText = quoteText + "\n[" + quoteAuthor + "]\n#PaulsWiseWords";
+    shareIntent.putExtra(Intent.EXTRA_TEXT, sharedText);
+    startActivity(Intent.createChooser(shareIntent, "Share Quote!"));
   }
 
   @Override
